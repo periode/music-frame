@@ -24,8 +24,10 @@ a sonic atmosphere contained in a sealed box. turn it on, let it run and fill th
 
 ## todo
 
-- [ ] have a step-up converter for the speaker
 - [ ] check for multiple outputs
+- [ ] add capacitors at the Vin of amp
+- [ ] add lowpass filter (?)
+- [ ] have a step-up converter for the speaker when running the LM386
 - [ ] integrate a switch for turning on and off
 - [ ] CNC full box
 - [ ] write a walkthrough

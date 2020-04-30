@@ -23,7 +23,7 @@ void setup() {
     return;
   }
 
-  player.setVolume(5);
+  player.setVolume(7);
   player.play("bullion.wav");
 
 }
