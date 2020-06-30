@@ -29,6 +29,8 @@ https://www.ebay.de/itm/Nano-ATmega-328-Board-CH340-USB-Chip-Arduino-Kompatibel/
 ## notes
 
 - larger surface provides a fuller, slightly louder sound
+- capacitor between power line of amp didn't help
+- star grounding didn't help
 - PAM8403 provides much louder sound, but with hiss:
     - fixes for hiss: add wo 1kohm resistors between Arduino's TX/RX and SD CARD
 

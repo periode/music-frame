@@ -20,3 +20,8 @@ size of the mounted surface: approx 12x8cm, voltage sent: between 5V and 12V
 - library used for playing back files: [TMRpcm](https://github.com/TMRh20/TMRpcm/wiki)
 
 - library for composition: [less concepts](https://maxforlive.com/library/device/6167/less-concepts)
+
+## mood
+
+[satoshi ashikawa - still way](https://www.youtube.com/watch?v=f33pvpdXzos) can loop forever
+[taku sugimoto](https://www.youtube.com/watch?v=pDUeojq6DrE) - microtonal
