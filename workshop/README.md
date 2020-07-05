@@ -14,6 +14,8 @@ the **electronics** part will include learning the basics of arduino, a hardware
 
 ----------------------------
 
+pierre - mate - benjamin - andrea
+
 - 10:00
   - welcome, introductions
   - presentation of the day
