@@ -8,6 +8,7 @@ a sonic atmosphere contained in a sealed box. turn it on, let it run and fill th
 
 ## resources
 
+- [workshop](workshop/README.md) - resources for the workshop
 - [tech.md](tech.md) - list of all parts currently used for the prototype
 - [music.md](music.md) - notes for musical generation
 - [workshop.md](workshop.md) - workshop to build your own tonkasten
@@ -24,7 +25,7 @@ a sonic atmosphere contained in a sealed box. turn it on, let it run and fill th
 
 ## todo
 
-- [ ] fix the build on the development arduino -> something got messed up withthe pins (it used to be pin 4 for CS, while the pin 10 was the one that was actually connected, and when i changed some things in the pcmConfig.h, it might have messed somehing up) -> **do a fresh build with the library tests in the arduino IDE**
+<!-- - [ ] fix the build on the development arduino -> something got messed up withthe pins (it used to be pin 4 for CS, while the pin 10 was the one that was actually connected, and when i changed some things in the pcmConfig.h, it might have messed somehing up) -> **do a fresh build with the library tests in the arduino IDE** -->
 - [ ] have a step-up converter for the speaker when running the LM386
 - [x] check for multiple outputs -> multiple outputs only available on MEGA boards (cause the arduino only has 1 16-bit timer)
 - [x] add capacitors at the Vin of amp -> did not improve
