@@ -44,3 +44,13 @@ pierre - mate - benjamin - andrea
     - foam cutting
     - woodboard assembly
     - painting
+
+## outcomes
+
+- everyone (5 people) was able to finish a build
+- no time to paint/coat
+- only one cut on the foam machine
+- no time to think about / write algorithmic composition
+- next time needs a step-up module
+- having board to test out soldering was good (also soldering from the reverse side)
+- having more examples/several finished versions (both of music and cutouts would be good to give more ideas to the participants)
