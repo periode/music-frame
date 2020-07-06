@@ -33,6 +33,8 @@ https://www.ebay.de/itm/Nano-ATmega-328-Board-CH340-USB-Chip-Arduino-Kompatibel/
 - star grounding didn't help
 - PAM8403 provides much louder sound, but with hiss:
     - fixes for hiss: add wo 1kohm resistors between Arduino's TX/RX and SD CARD
+- converting audio files to correct format: `ffmpeg -i inputfile -acodec pcm_u8 -ar 16000 -ac 1 output.wav`
+- filenames have to be 8 characters or less.
 
 https://www.raspberrypi.org/forums/viewtopic.php?t=232159
 https://forum.arduino.cc/index.php?topic=248426.0
