@@ -40,3 +40,7 @@ https://forum.arduino.cc/index.php?topic=248426.0
 https://forum.arduino.cc/index.php?topic=554100.0
 https://www.eevblog.com/forum/beginners/noise-form-pam8403-amplifier-board/ (low pass filter)
 https://www.ebay.com/itm/202799600574 audio transformators
+
+## cnc
+
+- baud rate should be set to 115200 (on mac)
