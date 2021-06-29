@@ -4,7 +4,7 @@ endless music box. wip.
 
 ## intent
 
-a sonic atmosphere contained in a sealed box. turn it on, let it run and fill the room for as long as needed.
+a sonic atmosphere contained in a wooden frame. turn it on, let it run and fill the room for as long as needed.
 
 ## resources
 
@@ -22,14 +22,3 @@ a sonic atmosphere contained in a sealed box. turn it on, let it run and fill th
 - [brand new noise](https://www.brandnewnoise.com/), for the product design (without the interaction/instrument aspect)
 - different modes? (morning, afternoon, night)
 - one long-ass soundscape vs. recombinating segments
-
-## todo
-
-<!-- - [ ] fix the build on the development arduino -> something got messed up withthe pins (it used to be pin 4 for CS, while the pin 10 was the one that was actually connected, and when i changed some things in the pcmConfig.h, it might have messed somehing up) -> **do a fresh build with the library tests in the arduino IDE** -->
-- [ ] have a step-up converter for the speaker when running the LM386
-- [x] check for multiple outputs -> multiple outputs only available on MEGA boards (cause the arduino only has 1 16-bit timer)
-- [x] add capacitors at the Vin of amp -> did not improve
-- [x] add lowpass filter (?) -> did not make a difference
-- [ ] integrate a switch for turning on and off
-- [ ] design full frame
-- [ ] write a walkthrough

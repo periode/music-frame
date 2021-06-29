@@ -1,0 +1,18 @@
+body {
+    background-color: #eee;
+    font-family: sans-serif;
+}
+
+button, div{
+    display: block;
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    padding: 3em;
+    max-width: 30%;
+    text-align: center;
+}
+
+audio{
+    display: none;
+}
