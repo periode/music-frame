@@ -1,12 +1,18 @@
 # todo
 
 - [ ] web interface for composition and communication
-  - [ ] random vs. markov chain
+  - [x] layout
+  - [ ] random
+  - [ ] markov chain
   - [ ] polyphonic
 - [ ] power supply
   - [ ] connect switch
 - [ ] frame design
+  - [x] drawing
+  - [x] basic frame in blender
   - [ ] support both standing and hanging
+  - [ ] rough modeling in blender
+  - [ ] details in fusion
 - [ ] controller
   - [ ] software volume control
   - [ ] stress test

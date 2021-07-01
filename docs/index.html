@@ -9,9 +9,33 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <button onclick="start()">start</button>
-    <button onclick="stop()">stop</button>
-    <div id="log"></div>
-    <audio src="" id="audio"></audio>
+    <div class="container">
+        <header>
+            <div class="title">Tonkasten</div>
+            <div class="nav-holder"></div>
+        </header>
+        <main>
+            <div class="abstract">
+                a generative sonic atmosphere contained in a wooden frame. turn it on, let it run and fill the room for as long as needed.
+            </div>
+            <div class="media">
+                <div class="images">
+                    <h3>images</h3>
+                    <img src="images/frame_1.png" alt="Front view of the wooden frame">
+                    <img src="images/frame_2.png" alt="Back view of the wooden frame">
+                </div>
+                <ul class="sounds">
+                    <h3>sounds</h3>
+                    <p>the soundscape loaded on the frame are played back dynamically. here are examples for the different modes of composition.</p>
+                    <li class="composition">
+                        <div class="name">random delayed</div>
+                        <div class="description">each sample plays back one after the other, picked randomly. a break of random duration is inserted after each sample.</div>
+                        <div class="playback-holder"></div>
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </div>
+    
 </body>
 </html>
