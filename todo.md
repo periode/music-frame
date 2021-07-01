@@ -2,7 +2,7 @@
 
 - [ ] web interface for composition and communication
   - [x] layout
-  - [ ] random
+  - [x] random
   - [ ] markov chain
   - [ ] polyphonic
 - [ ] power supply
@@ -11,6 +11,7 @@
   - [x] drawing
   - [x] basic frame in blender
   - [ ] support both standing and hanging
+    - [ ] possibility for table-like
   - [ ] rough modeling in blender
   - [ ] details in fusion
 - [ ] controller

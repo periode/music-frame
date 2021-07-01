@@ -24,18 +24,50 @@
                 <div class="section">
                     <h2>images</h2>
                     <img src="images/frame_1.png" alt="Front view of the wooden frame">
-                    <div class="legend">Front view</div>
+                    <div class="legend">front view</div>
                     <img src="images/frame_2.png" alt="Back view of the wooden frame">
-                    <div class="legend">Back view</div>
+                    <div class="legend">back view</div>
                 </div>
                 <ul class="section">
                     <h2>sounds</h2>
                     <p>the soundscape loaded on the frame are played back dynamically. here are examples for the different modes of composition.</p>
+
                     <li class="composition">
                         <div class="name">random delayed</div>
                         <div class="description">each sample plays back one after the other, picked randomly. a break of random duration is inserted after each sample.</div>
-                        <div class="playback-holder"></div>
+                        <div class="playback-holder">
+                            <button onclick="toggleRandomDelayed(this)">play</button>
+                            <div class="log" id="log-rd">
+                                <div class="msg">ready to play</div>
+                            </div>
+                            <audio src="" id="random-delayed"></audio>
+                        </div>
                     </li>
+
+                    <li class="composition">
+                        <div class="name">markov chain</div>
+                        <div class="description">each sample has a defined probability to play a given sample next. this allows for a more defined structure.</div>
+                        <div class="playback-holder">
+                            <button onclick="toggleRandomDelayed(this)">play</button>
+                            <div class="log" id="log-rd">
+                                <div class="msg">in progress</div>
+                            </div>
+                            <audio src="" id="random-delayed"></audio>
+                        </div>
+                    </li>
+
+                    <li class="composition">
+                        <div class="name">polyphonic</div>
+                        <div class="description">up to three samples can play at the same time, either randomly or in a markov chain.</div>
+                        <div class="playback-holder">
+                            <button onclick="toggleRandomDelayed(this)">play</button>
+                            <div class="log" id="log-rd">
+                                <div class="msg">in progress</div>
+                            </div>
+                            <audio src="" id="random-delayed"></audio>
+                        </div>
+                    </li>
+
                 </ul>
                 <ul class="section bullet-list">
                     <h2>specs</h2>

@@ -22,6 +22,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    background-color: white;
 }
 
 header, footer{
@@ -75,9 +76,10 @@ a{
     margin: auto;
     margin-top: 5em;
     margin-bottom: 5em;
-    width: 50%;
+    padding: 2em;
 
     font-size: 1.2em;
+    background-color: #f9eddb;
 }
 
 .content{
@@ -107,6 +109,22 @@ img{
     margin-bottom: 1em;
 }
 
+button{
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    font-size: 1em;
+    text-decoration: underline;
+
+    cursor: pointer;
+}
+
 .legend{
     font-size: 0.8em;
     margin-bottom: 4em;
@@ -125,4 +143,20 @@ img{
 .description{
     font-style: italic;
     font-size: 0.9em;
+}
+
+.log{
+    font-style: italic;
+    padding: 1em;
+    background-color: #f9eddb;
+    max-height: 100px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column-reverse;
+
+    font-size: 0.8em;
+}
+
+.msg{
+    margin-bottom: 0.25em;
 }
