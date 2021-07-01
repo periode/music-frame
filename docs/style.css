@@ -1,21 +1,61 @@
+@font-face {
+    font-family: 'Poppins Regular';
+    src: url('./assets/fonts/Poppins-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Ovo Regular';
+    src: url('./assets/fonts/Ovo-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Poppins Bold';
+    src: url('./assets/fonts/Poppins-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: 'Quicksand Bold';
+    src: url('./assets/fonts/Quicksand-SemiBold.ttf');
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
 }
 
+header, footer{
+    width: 100%;
+}
+
 header{
     padding-top: 2em;
-    padding-bottom: 2em;
+    padding-bottom: 1em;
+    margin-bottom: 2em;
+    border-bottom: 2px solid black;
 }
 
 main{
     display: flex;
     flex-wrap: wrap;
+    font-family: 'Poppins Regular', sans-serif;
+}
+
+footer{
+    margin-top: 5em;
+    padding-top: 1em;
+    border-top: 2px solid black;
+    padding-bottom: 5em;
+    display: flex;
+    justify-content: space-between;
 }
 
 li{
     list-style: none;
+}
+
+a{
+    color: black;
 }
 
 .container{
@@ -27,7 +67,7 @@ li{
 
 .container .title{
     font-size: 3em;
-    font-weight: bold;
+    font-family: 'Ovo Regular', serif;
 }
 
 .abstract{
@@ -36,15 +76,28 @@ li{
     margin-top: 5em;
     margin-bottom: 5em;
     width: 50%;
+
+    font-size: 1.2em;
 }
 
-.media{
+.content{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.images, .sounds{
+.section{
     width: 45%;
+}
+
+.bullet-list li{
+    margin-left: 1em;
+    list-style: inherit;
+}
+
+h2{
+    font-family: 'Ovo Regular', serif;
+    font-size: 2em;
 }
 
 img{
@@ -54,12 +107,19 @@ img{
     margin-bottom: 1em;
 }
 
+.legend{
+    font-size: 0.8em;
+    margin-bottom: 4em;
+    text-align: center;
+}
+
 .composition{
     margin-top: 4em;
 }
 
 .name{
     margin-bottom: 1em;
+    font-family: 'Poppins Bold', sans-serif;
 }
 
 .description{
