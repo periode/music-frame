@@ -18,3 +18,7 @@
   - [ ] software volume control
   - [ ] stress test
   - [ ] local web interface
+- [ ] code
+  - [ ] make each playmode into classes
+  - [ ] research threads
+  - [ ] use a player which supports mp3

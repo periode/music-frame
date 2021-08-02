@@ -3,6 +3,7 @@ import random
 import subprocess
 import sys
 import os
+import threading
 
 if len(sys.argv) > 1:
     state = sys.argv[1]
@@ -12,52 +13,80 @@ else:
 
 if state == "vexations":
     vexations_files = ["0", "1", "2", "3", "4", "5"]
-    vexations_durations = [27, 26, 26, 52, 27, 57]
+    vexations_intervals = [27, 26, 26, 52, 27, 57]
+    vexations_tracks = ["main"]
 elif state == "swirl":
     # load all files
     # probably a dict
-    track = "saba"
-    interval = 3
+    swirl_tracks = ["saba"]
+    swirl_intervals = [3, 3, 3, 3]
     swirl_files = ["0", "1", "2", "3"]
 else:
     exit(f'No existing playmode: {state}!')
 
-def swirl(_filenames, _interval, _track):
+tracks = list()
+
+def play(_filenames, _intervals, _track, _composition, _evt):
     index = 0
     start_time = time.time()
     timer = 0
 
-    while True:
+    while _evt.is_set():
         if time.time() - start_time > timer:
             index = random.randint(0, len(_filenames)-1)
-            timer = _interval + random.randint(-2, 3)
+            timer = _intervals[index] + random.randint(1, 3) # make that into a variable?
 
-            filename = f'swirl/{_track}/{_filenames[index]}.mp3'
+            filename = f'{_composition}/{_track}/{_filenames[index]}.mp3'
             filename = os.path.join(os.path.dirname(__file__), filename)
-            subprocess.Popen(["aplay", filename])
+            subprocess.Popen(["play", filename], shell=False)
 
             start_time = time.time()
 
-def vexations(_filenames, _timer):
-    index = 0
-    start_time = time.time()
-    timer = 0
-    while True:
-        if time.time() - start_time > timer:
-            index = random.randint(0, len(_filenames)-1)
-            timer = _timer[index] + random.randint(3, 5)
+def swirl(_filenames, _intervals, _tracks, _evt):
+    print("starting swirl")
+    
+    global tracks
+    _evt.set()
 
-            filename = f'vexations/{_filenames[index]}.wav'
-            filename = os.path.join(os.path.dirname(__file__), filename)
-            subprocess.Popen(["aplay", filename])
-
-            start_time = time.time()
+    for _track in _tracks:
+        track = threading.Thread(target=play, args=(_filenames, _intervals, _track, "swirl", _evt), daemon=True)
+        tracks.append(track)
+        track.start()
 
 
 
-if state == "vexations":
-    vexations(vexations_files, vexations_durations)
-elif state == "swirl":
-    # run 4 parallel threads
-    swirl(swirl_files, interval, track)
+def vexations(_filenames, _intervals, _tracks, _evt):
+    print("starting vexations")
 
+    global tracks
+    _evt.set()
+
+    for _track in _tracks:
+        track = threading.Thread(target=play, args=(_filenames, _intervals, _track, "vexations", _evt), daemon=True)
+        tracks.append(track)
+        track.start()
+
+
+def main():
+    run_event = threading.Event()
+    run_event.set()
+    if state == "vexations":
+        vexations(vexations_files, vexations_intervals, vexations_tracks, run_event)
+    elif state == "swirl":
+        # run 4 parallel threads
+        swirl(swirl_files, swirl_intervals, swirl_tracks, run_event)
+
+    try:
+        while 1:
+            time.sleep(.1)
+    except KeyboardInterrupt:
+        print("attempting to close threads.")
+        
+        run_event.clear()
+        for track in tracks:
+            track.join()
+        print("threads successfully closed")
+        time.sleep(2)
+
+
+main()
