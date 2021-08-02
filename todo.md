@@ -12,13 +12,20 @@
   - [x] basic frame in blender
   - [ ] support both standing and hanging
     - [ ] possibility for table-like
-  - [ ] rough modeling in blender
-  - [ ] details in fusion
+  - [x] rough modeling in blender
+  - [x] details in fusion
 - [ ] controller
   - [ ] software volume control
   - [ ] stress test
   - [ ] local web interface
 - [ ] code
   - [ ] make each playmode into classes
-  - [ ] research threads
-  - [ ] use a player which supports mp3
+    - [x] make the data structure
+    - [ ] implement delay offsets
+  - [ ] threads
+    - [x] research
+    - [ ] figure out how to cleanly close the threads
+  - [x] use a player which supports mp3
+    - [x] using `play` on arch
+    - [ ] check on raspi
+  - [ ] test on raspberry pi
