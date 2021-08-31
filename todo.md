@@ -4,8 +4,8 @@
   - [x] layout
   - [x] random
   - [ ] markov chain
-  - [ ] polyphonic
-  - [ ] add references
+  - [x] polyphonic
+  - [x] add references
 - [ ] power supply
   - [ ] connect switch
 - [ ] frame design
