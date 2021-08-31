@@ -4,6 +4,7 @@ import subprocess
 import sys
 import os
 import threading
+import socket
 
 from mutagen.mp3 import MP3
 
@@ -46,13 +47,20 @@ class Composition:
 
 # --------------------------------------------------------------------------------------
 
+host = socket.gethostname()
+print("host is " + host)
+binary = "play"
+
+if host == "tonkasten":
+    binary = "omxplayer"
+
 states = ["vexations", "swirl"]
 threads = list()
 
 if len(sys.argv) > 1:
     state = sys.argv[1]
 else:
-    exit("No playmode provided!")
+    exit("No playmode provided! " + str(states))
 
 if state not in states:
     exit(f'No existing playmode: {state}!')
@@ -70,7 +78,7 @@ def play(_filenames, _intervals, _track, _composition, _evt):
 
             filename = f'{_composition}/{_track}/{_filenames[index]}'
             filename = os.path.join(os.path.dirname(__file__), filename)
-            subprocess.Popen(["play", filename], shell=False)
+            subprocess.Popen([binary, filename], shell=False)
 
             start_time = time.time()
 
