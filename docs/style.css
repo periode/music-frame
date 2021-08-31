@@ -51,50 +51,12 @@ footer{
     justify-content: space-between;
 }
 
-li{
-    list-style: none;
+ul li{
+    list-style: disc;
 }
 
 a{
     color: black;
-}
-
-.container{
-    width: 60%;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.container .title{
-    font-size: 3em;
-    font-family: 'Ovo Regular', serif;
-}
-
-.abstract{
-    align-self: center;
-    margin: auto;
-    margin-top: 5em;
-    margin-bottom: 5em;
-    padding: 2em;
-
-    font-size: 1.2em;
-    background-color: #f9eddb;
-}
-
-.content{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.section{
-    width: 45%;
-}
-
-.bullet-list li{
-    margin-left: 1em;
-    list-style: inherit;
 }
 
 h2{
@@ -123,6 +85,62 @@ button{
     text-decoration: underline;
 
     cursor: pointer;
+
+    min-width: 20%;
+}
+
+.container{
+    width: 60%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container .title{
+    font-size: 3em;
+    font-family: 'Ovo Regular', serif;
+}
+
+.abstract{
+    align-self: center;
+    margin: auto;
+    margin-top: 5em;
+    margin-bottom: 5em;
+    padding: 2em;
+    max-width: 60%;
+
+    font-size: 1.2em;
+    background-color: #f9eddb;
+}
+
+.section a {
+    font-style: italic;
+}
+
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.section{
+    width: 45%;
+}
+
+.full{
+    width: 100%;
+}
+
+.bullet-list li{
+    margin-left: 1em;
+    list-style: inherit;
+}
+
+.playback-holder{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
 }
 
 .legend{
@@ -147,10 +165,13 @@ button{
 
 .log{
     font-style: italic;
-    padding: 1em;
+    
     background-color: #f9eddb;
-    max-height: 100px;
-    overflow-y: scroll;
+    height: 5rem;
+
+    min-width: 80%;
+
+    overflow-y: hidden;
     display: flex;
     flex-direction: column-reverse;
 
@@ -159,4 +180,29 @@ button{
 
 .msg{
     margin-bottom: 0.25em;
+    margin-left: 0.5em;
+}
+
+.in-progress {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 992px) {
+    footer, header, main{
+        width: 90%;
+        margin: auto;
+    }
+
+    .container{
+        width: 100%;
+    }
+
+    .section{
+        width: 100%;
+    }
+
+    .abstract{
+        max-width: 90%;
+        font-size: 0.85em;
+    }
 }

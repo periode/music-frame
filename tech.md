@@ -5,8 +5,18 @@
 ### main
 
 - exciter: [dayton audio - DAEX13CT-4](https://www.daytonaudio.com/product/1172/daex13ct-4-coin-type-13mm-exciter-3w-4-ohm) - 8.95e
-- controller: raspbery pi zero w - 5
+- - 4 Ohm [impedance](http://www.learningaboutelectronics.com/Articles/What-is-speaker-impedance)
+- - 3 W RMS output
 - amp: [hifiberry miniamp](https://www.hifiberry.com/shop/boards/miniamp/)
+- - class D
+
+size of the mounted surface: approx 40x30cm, voltage sent: between 5V and 12V
+
+### python software
+
+- file playback
+  - aplay 1.2.5.1
+  - omxplayer
 
 ### alternative
 
@@ -18,13 +28,14 @@
 - integrated sd + dac: [yx5300](https://www.ebay.de/itm/YX5300-MP3-Musik-Player-Modul-Serial-UART-TTL-Module-Arduino-Raspberry-YX6300/253998552373?hash=item3b237e5535:g:0MMAAOSwWIJb-t2i)
 - esp32 board: [wemos pro](https://docs.wemos.cc/en/latest/d32/d32_pro.html)
 
-## software
+### arduino software
 
 - playback of WAV files from SD Card: [TMRpcm](https://github.com/TMRh20/TMRpcm)
 
 ## notes
 
 - issue with software volume control?
+  - https://www.hifiberry.com/docs/hifiberryos/hifiberryos-how-to-control-playback/ (making a rotary volume control)
 
 ## cnc
 

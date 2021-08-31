@@ -5,6 +5,7 @@
   - [x] random
   - [ ] markov chain
   - [ ] polyphonic
+  - [ ] add references
 - [ ] power supply
   - [ ] connect switch
 - [ ] frame design

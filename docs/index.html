@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,86 +9,157 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
+
 <body>
     <div class="container">
         <header>
-            <div class="title">Tonkasten</div>
+            <div class="title">pogłos</div>
             <div class="nav-holder"></div>
         </header>
         <main>
             <div class="abstract">
-                a generative sonic atmosphere contained in a wooden frame.<br/>
-                <br/>
-                turn it on, and let it fill the room for as long as needed.
+                pogłos<br />
+                <ol>
+                    <li>an acoustic phenomenon consisting in the prolongation of sound, caused by the action of
+                        reflected waves in a closed room</li>
+                    <li>a multiplication of sound</li>
+                    <li>a reference to something, especially in someone's work</li>
+                </ol>
             </div>
             <div class="content">
+                <div class="section full">
+                    <h2>idea</h2>
+                    <p>pogłos is a generative sonic atmosphere contained in a wooden frame.<br /><br>
+                        it is slightly bigger than
+                        an A4 piece of paper, and it consists of a a small computer, a switch, and a speaker. the switch
+                        turns
+                        on the computer, the computer starts generating an ever-evolving version of a musical
+                        composition, and the speaker emits vibrations from the wood to fill the room with a
+                        soundscape.<br /><br />
+                        compositions are each conceived as a generative system, specifically for pogłos. they intend to
+                        live in the background of our lives, setting an atmosphere, and decorating our sonic environment. when they're player by the computer, it is as if it was quietly improvising a known repertoire.
+                    </p>
+                    <p>
+                        here are some of the inspirations for the project:
+                    <ul>
+                        <li>
+                            the <a href="https://www.youtube.com/watch?v=VlSM3GMuYVU" target="_blank"
+                                rel="noopener noreferrer">buddha machine</a>, which started the initial process.
+                        </li>
+                        <li>
+                            <a href="https://en.wikipedia.org/wiki/Vexations" target="_blank"
+                                rel="noopener noreferrer">erik satie's vexations</a>, for generative tendency to use
+                            repetition as a means of evolution—the same segment is repeated by the performer
+                            countless times, changing in quality throughout the duration of the piece.
+                        </li>
+                        <li>
+                            brian eno's work with <a
+                                href="https://www.wired.com/1997/10/can-generative-music-carry-the-nets-tunes/"
+                                target="_blank" rel="noopener noreferrer">koan</a>, in which he released albums as
+                            software.
+                        </li>
+                        <li>
+                            <a href="http://listen.hatnote.com/" target="_blank" rel="noopener noreferrer">listen to
+                                wikipedia</a>, a contemporary example of music composed as a generative background.
+                        </li>
+                    </ul>
+                    </p>
+                    <p>
+                        turn it on, and let it fill the room for as long as needed.
+                    </p>
+                </div>
                 <div class="section">
                     <h2>images</h2>
-                    <img src="images/frame_1.png" alt="Front view of the wooden frame">
+                    <a href="images/frame_1.png" target="_blank" rel="noopener noreferrer"><img src="images/frame_1.png"
+                            alt="Front view of the wooden frame">
+                    </a>
                     <div class="legend">front view</div>
-                    <img src="images/frame_2.png" alt="Back view of the wooden frame">
+                    <a href="images/frame_2.png" target="_blank" rel="noopener noreferrer"><img src="images/frame_2.png"
+                            alt="Back view of the wooden frame"></a>
                     <div class="legend">back view</div>
                 </div>
-                <ul class="section">
+                <div class="section">
                     <h2>sounds</h2>
-                    <p>the soundscape loaded on the frame are played back dynamically. here are examples for the different modes of composition.</p>
+                    <p>the soundscape loaded on the frame are played back dynamically. here are examples for the
+                        different modes of composition.</p>
+                    <ul>
+                        <li class="composition">
+                            <div class="name">random delayed</div>
+                            <div class="description">each sample plays back one after the other, picked randomly. a
+                                break of
+                                random duration is inserted after each sample.</div>
 
-                    <li class="composition">
-                        <div class="name">random delayed</div>
-                        <div class="description">each sample plays back one after the other, picked randomly. a break of random duration is inserted after each sample.</div>
-                        <div class="playback-holder">
-                            <button onclick="toggleRandomDelayed(this)">play</button>
-                            <div class="log" id="log-rd">
-                                <div class="msg">ready to play</div>
+                            <div class="playback-holder">
+                                <!-- <span class="credits">erik satie - vexations</span> -->
+                                <button onclick="startAudio(this, 'random')">play</button>
+                                <div class="log" id="log-rd">
+                                    <div class="msg">erik satie - vexations</div>
+                                </div>
+                                <audio src="" id="random-delayed"></audio>
                             </div>
-                            <audio src="" id="random-delayed"></audio>
-                        </div>
-                    </li>
+                        </li>
 
-                    <li class="composition">
-                        <div class="name">markov chain</div>
-                        <div class="description">each sample has a defined probability to play a given sample next. this allows for a more defined structure.</div>
-                        <div class="playback-holder">
-                            <button onclick="toggleRandomDelayed(this)">play</button>
-                            <div class="log" id="log-rd">
-                                <div class="msg">in progress</div>
+                        <li class="composition">
+                            <div class="name">polyphonic</div>
+                            <div class="description">up to four voices can play at the same time, either randomly or in
+                                a
+                                markov chain.
                             </div>
-                            <audio src="" id="random-delayed"></audio>
-                        </div>
-                    </li>
 
-                    <li class="composition">
-                        <div class="name">polyphonic</div>
-                        <div class="description">up to three samples can play at the same time, either randomly or in a markov chain.</div>
-                        <div class="playback-holder">
-                            <button onclick="toggleRandomDelayed(this)">play</button>
-                            <div class="log" id="log-rd">
-                                <div class="msg">in progress</div>
+                            <div class="playback-holder">
+                                <!-- <span class="credits">période - swirl</span> -->
+                                <button onclick="startAudio(this, 'polyphonic')">play</button>
+                                <div class="log" id="log-pp">
+                                    <div class="msg">période - swirl</div>
+                                </div>
+                                <audio src="" class="polyphonic"></audio>
+                                <audio src="" class="polyphonic"></audio>
+                                <audio src="" class="polyphonic"></audio>
+                                <audio src="" class="polyphonic"></audio>
                             </div>
-                            <audio src="" id="random-delayed"></audio>
-                        </div>
-                    </li>
+                        </li>
 
-                </ul>
-                <ul class="section bullet-list">
+                        <li class="composition">
+                            <div class="name">markov chain</div>
+                            <div class="description">each sample has a defined probability to play a given sample next.
+                                this
+                                allows for a more defined structure.</div>
+                            <div class="playback-holder">
+                                <button onclick="">-</button>
+                                <div class="log" id="log-rd">
+                                    <div class="msg in-progress">in progress</div>
+                                </div>
+                                <audio src="" id="random-delayed"></audio>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="section bullet-list">
                     <h2>specs</h2>
-                    <li>raspberry pi zero w</li>
-                    <li>5.1V / 2.5A power supply</li>
-                    <li>dayton 3W 4Ohm exciter</li>
-                    <li>hifiberry miniamp</li>
-                    <li>wooden frame</li>
-                </ul>
-            </div>
+                    <p>find out more on the <a href="https://github.com/tonkasten" target="_blank" rel="noopener noreferrer">github</a>.</p>
+                    <ul>
+                        <li>42cm * 26cm * 5cm</li>
+                        <li>1.2kg</li>
+                        <li>raspberry pi zero w</li>
+                        <li>5.1V / 2.5A power supply</li>
+                        <li>dayton 3W 4Ohm exciter</li>
+                        <li>hifiberry miniamp</li>
+                        <li>wooden frame</li>
+                    </ul>
+                    </ul>
+                </div>
         </main>
         <footer>
             <div class="half">
-                made by <a href="http://pierredepaz.net" target="_blank" rel="noopener noreferrer">pierre</a>.
+                by <a href="http://enframed.net" target="_blank" rel="noopener noreferrer">période</a>.
             </div>
             <div class="half">
-                find out more on <a href="http://github.com/periode/tonkasten" target="_blank" rel="noopener noreferrer">github</a>.
+                on <a href="http://github.com/periode/tonkasten" target="_blank"
+                    rel="noopener noreferrer">github</a>.
             </div>
         </footer>
     </div>
-    
+
 </body>
+
 </html>
