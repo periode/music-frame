@@ -1,5 +1,6 @@
 let audio_rd, log, timeout_rd
-let audios_pp
+let audios_pp, timeouts_pp = []
+
 let samples_rd = [
     "vexations/0.mp3",
     "vexations/1.mp3",
@@ -8,8 +9,13 @@ let samples_rd = [
     "vexations/4.mp3",
     "vexations/5.mp3"
 ]
+
+
 let index_rd = 0
-let duration_rd
+
+let samples_pp = ["pad", "saba", "strumboli", "tree"]
+let samples_max_pp = [2, 9, 11, 3]
+let indexes_pp = [0, 0, 0, 0]
 
 let silence_min = 1000
 let silence_max = 5000
@@ -43,8 +49,9 @@ let startAudio = (_el, _mode) => {
 
 let stopAudio = () => {
     if (audio_rd) audio_rd.pause()
-    if(audios_pp[0]) audios_pp[0].pause()
+    if (audios_pp[0]) audios_pp[0].pause()
     if (timeout_rd) clearTimeout(timeout_rd)
+    if (timeouts_pp) for (let t of timeouts_pp) { clearTimeout(t) }
 }
 
 let startRandomDelayed = () => {
@@ -73,17 +80,25 @@ let playRandomDelayed = () => {
 let startPolyphonic = () => {
     audios_pp = document.getElementsByClassName('polyphonic')
     log = document.getElementById('log-pp')
-    playPolyphonic()
+    for (let i = 0; i < audios_pp.length; i++) {
+        playPolyphonic(i)
+    }
 }
 
-let playPolyphonic = () => {
-    audios_pp[0].loop = true
-    audios_pp[0].src = 'assets/audio/swirl/full.mp3'
-    audios_pp[0].onloadedmetadata = () => {
-audios_pp[0].play()
-        let el = document.createElement('div')
-        el.setAttribute('class', 'msg')
-        el.innerText += 'playing mixed-down version of the composition'
-log.prepend(el)
-    }
+let playPolyphonic = (i) => {    
+        audios_pp[i].src = `assets/audio/swirl/${samples_pp[i]}/${Math.floor(Math.random() * samples_max_pp[i])}.mp3`
+        audios_pp[i].onloadedmetadata = () => {
+            audios_pp[i].play()
+
+            let offset = audios_pp[i].duration * 1000 + Math.random() * silence_max + silence_min
+
+            let el = document.createElement('div')
+            el.setAttribute('class', 'msg')
+            el.innerText += `playing ${samples_pp[i]}/${Math.floor(Math.random() * samples_max_pp[i])}.mp3`
+            log.prepend(el)
+
+            if (timeouts_pp[i]) clearInterval(timeouts_pp[i])
+            timeouts_pp[i] = setTimeout(() => {playPolyphonic(i)}, offset)
+        }
+    
 }

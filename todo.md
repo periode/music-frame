@@ -28,5 +28,6 @@
     - [ ] figure out how to cleanly close the threads
   - [x] use a player which supports mp3
     - [x] using `play` on arch
-    - [ ] check on raspi
-  - [ ] test on raspberry pi
+    - [x] check on raspi
+      - [x] had to use mplayer
+  - [x] test on raspberry pi
