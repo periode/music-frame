@@ -41,10 +41,6 @@ class Composition:
         print(self.filenames)
         print(self.intervals)
 
-        # for i in range(len(self.tracks)):
-        #     for j in range(len(self.filenames[i])):
-        #         print("playing ", self.filenames[i][j], " for ", self.intervals[i][j])
-
 # --------------------------------------------------------------------------------------
 
 host = socket.gethostname()
@@ -52,7 +48,7 @@ print("host is " + host)
 binary = "play"
 
 if host == "tonkasten":
-    binary = "omxplayer"
+    binary = "mplayer"
 
 states = ["vexations", "swirl"]
 threads = list()
