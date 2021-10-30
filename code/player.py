@@ -47,7 +47,7 @@ host = socket.gethostname()
 print("host is " + host)
 binary = "play"
 
-if host == "tonkasten":
+if host == "poglos":
     binary = "mplayer"
 
 states = ["vexations", "swirl"]
