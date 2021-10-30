@@ -4,7 +4,9 @@
 
 ### main
 
-- exciter: [dayton audio - DAEX13CT-4](https://www.daytonaudio.com/product/1172/daex13ct-4-coin-type-13mm-exciter-3w-4-ohm) - 8.95e
+- exciters:
+- - [dayton audio - DAEX13CT-4](https://www.daytonaudio.com/product/1172/daex13ct-4-coin-type-13mm-exciter-3w-4-ohm) / 8.95e / __too low__ at 3W
+- - [dayton exciter - DAEX25CT-4](https://www.variant-hifi.de/produkt/exciters/dayton-audio-daex25ct4-1422.html) / 11.50e 10W
 - - 4 Ohm [impedance](http://www.learningaboutelectronics.com/Articles/What-is-speaker-impedance)
 - - 3 W RMS output
 - amp: [hifiberry miniamp](https://www.hifiberry.com/shop/boards/miniamp/)
@@ -14,12 +16,21 @@ size of the mounted surface: approx 40x30cm, voltage sent: between 5V and 12V
 
 ### python software
 
+- python version: 3.7+
+- `pip install -r requirements.txt`
+- - mutagen: get track duration
 - file playback
-  - aplay 1.2.5.1
-  - omxplayer
+  - [mplayer](http://www.mplayerhq.hu/design7/info.html) (raspberry pi)
+  - play (linux)
+
+[how to make python3 default](https://stackoverflow.com/questions/62275714/how-to-change-the-default-python-version-in-raspberry-pi)
+
+- `sudo ln -s /usr/bin/pip3 /usr/bin/pip`
+- `sudo rm /usr/bin/python && sudo ln -s /usr/bin/python3 /usr/bin/python`
 
 ### alternative
 
+- battery version: [pisugar2](https://www.tindie.com/products/pisugar/pisugar2-battery-for-raspberry-pi-zero/)
 - raspi amp: [audio shim amp](https://thepihut.com/collections/raspberry-pi-audio-hats/products/audio-amp-shim-3w-mono-amp)
 - controller: [arduino nano](https://www.ebay.de/itm/Nano-ATmega-328-Board-CH340-USB-Chip-Arduino-Kompatibel/252742123829) - 4.95
 - amplifier: [lm386 module](https://www.ebay.de/itm/Nano-ATmega-328-Board-CH340-USB-Chip-Arduino-Kompatibel/252742123829) - 2.95
