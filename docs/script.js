@@ -49,8 +49,8 @@ let startAudio = (_el, _mode) => {
 
 let stopAudio = () => {
     if (audio_rd) audio_rd.pause()
-    if (audios_pp[0]) audios_pp[0].pause()
     if (timeout_rd) clearTimeout(timeout_rd)
+    // if (audios_pp) for (let a of audios_pp) { a.pause() } //-- hard break
     if (timeouts_pp) for (let t of timeouts_pp) { clearTimeout(t) }
 }
 
