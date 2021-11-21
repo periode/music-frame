@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import time
 import random
 import subprocess
@@ -14,7 +16,7 @@ class Composition:
     filenames = []
     intervals = []
     def __init__(self, _name):
-        print("- loading composition: ", _name)
+        print(f'- loading composition: {_name}')
         self.name = _name
 
         # getting all tracks from dir names
@@ -32,23 +34,26 @@ class Composition:
                 intervals = list()
                 for f in files:
                     audio = MP3(os.path.join(current_dir, f))
-                    intervals.append(audio.info.length)
+                    intervals.append(audio.info.length + random.randint(1, 3))
 
                 self.intervals.append(intervals)
                 
-        
-        print(self.tracks)
-        print(self.filenames)
-        print(self.intervals)
+        if DEBUG:
+            print(f'tracks in composition: {self.tracks}')
+            print(f'filenames: {self.filenames}')
+            print(f'intervals: {self.intervals}')
 
 # --------------------------------------------------------------------------------------
 
+DEBUG = False
+
 host = socket.gethostname()
-print("host is " + host)
 binary = "play"
+args = ["-q"]
 
 if host == "poglos":
     binary = "mplayer"
+    args = ["-really-quiet"]
 
 states = ["vexations", "swirl"]
 threads = list()
@@ -56,31 +61,37 @@ threads = list()
 if len(sys.argv) > 1:
     state = sys.argv[1]
 else:
-    exit("No playmode provided! " + str(states))
+    exit(f'No playmode provided! {str(states)}')
 
 if state not in states:
     exit(f'No existing playmode: {state}!')
+
+if DEBUG:
+    print('- playing on {host}, using {binary} and args {args}')
 
 
 def play(_filenames, _intervals, _track, _composition, _evt):
     index = 0
     start_time = time.time()
     timer = 0
+    process = None
 
     while _evt.is_set():
         if time.time() - start_time > timer:
             index = random.randint(0, len(_filenames)-1)
-            timer = _intervals[index] + random.randint(1, 3) # make that into a variable?
+            timer = _intervals[index]
 
             filename = f'{_composition}/{_track}/{_filenames[index]}'
             filename = os.path.join(os.path.dirname(__file__), filename)
-            subprocess.Popen([binary, filename], shell=False)
+            process = subprocess.Popen([binary, filename, *args], shell=False)
 
             start_time = time.time()
 
-def begin(_composition, _evt):
-    print("- starting ", _composition.name)
-    
+    if process:
+        process.terminate()
+        process.wait()
+
+def begin(_composition, _evt):    
     global threads
     _evt.set()
 
@@ -106,8 +117,7 @@ def main():
         run_event.clear()
         for thread in threads:
             thread.join()
-        time.sleep(2)
-        print("...tschuss!")
+        print("...coda.")
 
 
 main()
