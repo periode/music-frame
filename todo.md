@@ -3,31 +3,36 @@
 - [ ] web interface for composition and communication
   - [x] layout
   - [x] random
-  - [ ] markov chain
+  - [ ] markov chain (use vexations as test case + figure out intervals)
   - [x] polyphonic
   - [x] add references
 - [ ] power supply
-  - [ ] connect switch
-- [ ] frame design
+  - [ ] connect power supply
+  - [ ] connect front switch
+- [x] frame design
   - [x] drawing
   - [x] basic frame in blender
-  - [ ] support both standing and hanging
-    - [ ] possibility for table-like
+  - [x] support both standing and hanging
+    - [x] possibility for table-like
   - [x] rough modeling in blender
   - [x] details in fusion
 - [ ] controller
   - [ ] software volume control
+    - [ ] [using softvol 1](https://bytesnbits.co.uk/raspberry-pi-i2s-sound-output/)
+    - [ ] [using softvol 2](https://github.com/pimoroni/pirate-audio/issues/32) (`mplayer file -af volume=1`)
   - [ ] stress test
   - [ ] local web interface
 - [ ] code
+  - [x] added debug mode
   - [ ] make each playmode into classes
     - [x] make the data structure
-    - [ ] implement delay offsets
-  - [ ] threads
+    - [ ] implement delay offsets (could live in a separate config/txt file in the directory for each track? or be a rough setting (sparse, often, mid))
+  - [x] threads
     - [x] research
-    - [ ] figure out how to cleanly close the threads
+    - [x] figure out how to cleanly close the threads (based on [this](https://stackoverflow.com/questions/41961430/how-to-cleanly-kill-subprocesses-in-python))
   - [x] use a player which supports mp3
     - [x] using `play` on arch
     - [x] check on raspi
       - [x] had to use mplayer
+    - [x] have an args list for each player (e.g. quiet or not)
   - [x] test on raspberry pi
