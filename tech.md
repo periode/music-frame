@@ -5,14 +5,14 @@
 ### main
 
 - exciters:
-- - [dayton audio - DAEX13CT-4](https://www.daytonaudio.com/product/1172/daex13ct-4-coin-type-13mm-exciter-3w-4-ohm) / 8.95e / __too low__ at 3W
 - - [dayton exciter - DAEX25CT-4](https://www.variant-hifi.de/produkt/exciters/dayton-audio-daex25ct4-1422.html) / 11.50e 10W
 - - 4 Ohm [impedance](http://www.learningaboutelectronics.com/Articles/What-is-speaker-impedance)
 - - 3 W RMS output
-- amp: [hifiberry miniamp](https://www.hifiberry.com/shop/boards/miniamp/)
-- - class D
+- amp: 
+- [hifiberry miniamp](https://www.hifiberry.com/shop/boards/miniamp/)
+- [adafruit stereo speaker bonnet](https://www.adafruit.com/product/3346) - cheaper and smaller
 
-size of the mounted surface: approx 40x30cm, voltage sent: between 5V and 12V
+size of the mounted surface: approx 50x35cm, voltage sent: between 5V and 12V
 
 ### python software
 
