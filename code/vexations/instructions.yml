@@ -1,0 +1,6 @@
+tracks:
+  main:
+    mode: numeric
+    range:
+      - 2
+      - 10

@@ -24,9 +24,10 @@
   - [ ] local web interface
 - [ ] code
   - [x] added debug mode
+  - [ ] add cute output: for each track pick a single character to print on the terminal (e.g. . - * ^)
   - [ ] make each playmode into classes
     - [x] make the data structure
-    - [ ] implement delay offsets (could live in a separate config/txt file in the directory for each track? or be a rough setting (sparse, often, mid))
+    - [x] implement delay offsets through composition instruction config file
   - [x] threads
     - [x] research
     - [x] figure out how to cleanly close the threads (based on [this](https://stackoverflow.com/questions/41961430/how-to-cleanly-kill-subprocesses-in-python))

@@ -23,3 +23,11 @@ questions of timing, of spacing, of silence. questions of repetition and resolut
 ## software
 
 the ideal is to share directly the project file (for instance, `.als` for ableton live, `.maxpat` for max, any source for programming environments), along with all samples used.
+
+## random playback
+
+there is a config at the top of each track directory:
+- mode
+  - numeric: a given range of seconds to wait between two tracks
+  - measure: a given range of proportions of the track length (0, 0.25, 0.5, 0.75, 1)
+  - markov

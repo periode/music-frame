@@ -9,6 +9,7 @@ import threading
 import socket
 
 from mutagen.mp3 import MP3
+import yaml
 
 class Composition:
     name = ""
@@ -18,6 +19,7 @@ class Composition:
     def __init__(self, _name):
         print(f'- loading composition: {_name}')
         self.name = _name
+        self.instructions = yaml.safe_load(open(os.path.join(os.path.dirname(__file__), self.name) + "/instructions.yml"))
 
         # getting all tracks from dir names
         for dirpath, dirs, files in os.walk(os.path.join(os.path.dirname(__file__), self.name)): 
@@ -27,19 +29,26 @@ class Composition:
         # getting all filenames and intervals from tracks
         for track in self.tracks:
             current_dir = os.path.join(os.path.dirname(__file__), self.name, track)
-
+            track_instructions = self.instructions['tracks'][track]
+            
             for dirpath, dirs, files in os.walk(current_dir): 
                 self.filenames.append(files)
 
                 intervals = list()
                 for f in files:
                     audio = MP3(os.path.join(current_dir, f))
-                    intervals.append(audio.info.length + random.randint(1, 3))
-
+                    offset = 0
+                    if track_instructions['mode'] == 'numeric':
+                        offset = random.randint(track_instructions['range'][0], track_instructions['range'][1])
+                    else:
+                        print(f'no mode found for track {track}: {track_instructions["mode"]}')
+                    intervals.append(audio.info.length + offset)
+                
                 self.intervals.append(intervals)
                 
         if DEBUG:
             print(f'tracks in composition: {self.tracks}')
+            print(f'composition instructions: {self.instructions}')
             print(f'filenames: {self.filenames}')
             print(f'intervals: {self.intervals}')
 
@@ -117,7 +126,7 @@ def main():
         run_event.clear()
         for thread in threads:
             thread.join()
-        print("...coda.")
+        print("\n...coda.")
 
 
 main()

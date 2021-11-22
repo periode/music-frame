@@ -14,7 +14,7 @@
 
 size of the mounted surface: approx 50x35cm, voltage sent: between 5V and 12V
 
-### python software
+### software
 
 - python version: 3.7+
 - `pip install -r requirements.txt`
