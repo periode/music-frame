@@ -24,6 +24,8 @@ questions of timing, of spacing, of silence. questions of repetition and resolut
 
 the ideal is to share directly the project file (for instance, `.als` for ableton live, `.maxpat` for max, any source for programming environments), along with all samples used.
 
+for conversion: `ffmpeg-normalize *.wav -ext mp3 -t -5 -c:a libmp3lame -t .`
+
 ## random playback
 
 there is a config at the top of each track directory:
