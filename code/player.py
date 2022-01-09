@@ -19,7 +19,10 @@ class Composition:
     def __init__(self, _name):
         print(f'- loading composition: {_name}')
         self.name = _name
-        self.instructions = yaml.safe_load(open(os.path.join(os.path.dirname(__file__), self.name) + "/instructions.yml"))
+        try:
+            self.instructions = yaml.safe_load(open(os.path.join(os.path.dirname(__file__), self.name) + "/instructions.yml"))
+        except:
+            exit(f'no instructions found for composition: {self.name}.')
 
         # getting all tracks from dir names
         for dirpath, dirs, files in os.walk(os.path.join(os.path.dirname(__file__), self.name)): 
