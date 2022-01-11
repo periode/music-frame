@@ -1,9 +1,9 @@
 # todo
 
 - [ ] web interface for composition and communication
+  - [ ] switch from labelling as technique to labelling as compositions (swirl, gabor, vexations)
   - [x] layout
   - [x] random
-  - [ ] markov chain (use vexations as test case + figure out intervals)
   - [x] polyphonic
   - [x] add references
 - [ ] power supply
@@ -25,7 +25,12 @@
 - [ ] code
   - [x] added debug mode
   - [ ] add cute output: for each track pick a single character to print on the terminal (e.g. . - * ^)
-  - [ ] make each playmode into classes
+  - [ ] check pygame playback on raspi
+  - [x] move all binaries to pygame
+  - [ ] figure out how to load modules dynamically in python, and have each composition as a module
+  - [x] pygame playback
+    - [x] make lfo for volume
+  - [x] make each playmode into classes
     - [x] make the data structure
     - [x] implement delay offsets through composition instruction config file
   - [x] threads

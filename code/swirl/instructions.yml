@@ -1,0 +1,23 @@
+name: swirl
+mode: numeric
+tracks:
+  pad:
+    mode: numeric
+    range:
+      - 2
+      - 10
+  saba:
+    mode: numeric
+    range:
+      - 2
+      - 10
+  tree:
+    mode: numeric
+    range:
+      - 2
+      - 10
+  strumboli:
+    mode: numeric
+    range:
+      - 2
+      - 10

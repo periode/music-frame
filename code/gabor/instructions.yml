@@ -1,0 +1,10 @@
+name: gabor
+mode: oscillating
+tracks:
+  main:
+    offset:
+      - 0
+      - 3
+    period:
+      - 0.1
+      - 0.2
