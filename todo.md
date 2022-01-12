@@ -27,7 +27,13 @@
   - [ ] add cute output: for each track pick a single character to print on the terminal (e.g. . - * ^)
   - [ ] check pygame playback on raspi
   - [x] move all binaries to pygame
-  - [ ] figure out how to load modules dynamically in python, and have each composition as a module
+  - [ ] apache server
+    - [x] running on arch
+    - [ ] running on pi
+  - [ ] connect with the flask API
+    - [ ] list available compositions
+    - [ ] start compositions
+    - [ ] stop compositions
   - [x] pygame playback
     - [x] make lfo for volume
   - [x] make each playmode into classes
