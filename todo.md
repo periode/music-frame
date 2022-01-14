@@ -25,7 +25,7 @@
 - [ ] code
   - [x] added debug mode
   - [ ] add cute output: for each track pick a single character to print on the terminal (e.g. . - * ^)
-  - [ ] make `run_event` and `threads` member fields of `Composition`
+  - [x] make `run_event` and `threads` member fields of `Composition`
   - [ ] check pygame playback on raspi
   - [x] move all binaries to pygame
   - [ ] apache server
