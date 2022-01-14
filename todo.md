@@ -28,13 +28,14 @@
   - [x] make `run_event` and `threads` member fields of `Composition`
   - [ ] check pygame playback on raspi
   - [x] move all binaries to pygame
+  - [ ] check bug on swirl where some files are not found
   - [ ] apache server
     - [x] running on arch
     - [ ] running on pi
   - [ ] connect with the flask API
     - [ ] make the server run on its own thread
-    - [ ] list available compositions
-    - [ ] start compositions
+    - [x] list available compositions
+    - [x] start compositions
     - [x] stop compositions
   - [x] pygame playback
     - [x] make lfo for volume
