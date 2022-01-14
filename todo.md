@@ -25,15 +25,17 @@
 - [ ] code
   - [x] added debug mode
   - [ ] add cute output: for each track pick a single character to print on the terminal (e.g. . - * ^)
+  - [ ] make `run_event` and `threads` member fields of `Composition`
   - [ ] check pygame playback on raspi
   - [x] move all binaries to pygame
   - [ ] apache server
     - [x] running on arch
     - [ ] running on pi
   - [ ] connect with the flask API
+    - [ ] make the server run on its own thread
     - [ ] list available compositions
     - [ ] start compositions
-    - [ ] stop compositions
+    - [x] stop compositions
   - [x] pygame playback
     - [x] make lfo for volume
   - [x] make each playmode into classes

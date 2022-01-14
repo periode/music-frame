@@ -15,11 +15,15 @@ os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame.mixer as mixer
 import yaml
 from flask import Flask
+from flask_cors import CORS, cross_origin
 
-DEBUG = False
+composition = None
 
 class Composition:
-    global DEBUG
+    run_event = None
+    threads = None
+
+    debug = False
     name = ""
     tracks = []
     filenames = []
@@ -29,9 +33,12 @@ class Composition:
     periods = []
     offsets = []
 
-    def __init__(self, _name):
+    def __init__(self, _name, _debug):
         print(f"loading composition - {_name}")
         self.name = _name
+        self.debug = _debug
+        
+
         try:
             self.instructions = yaml.safe_load(
                 open(
@@ -79,6 +86,7 @@ class Composition:
                         periods.append(period)
                         offsets.append(offset)
                         intervals.append(0)
+                        volumes.append(1)
                     else:
                         print(
                             f'no mode found for track {track}: {track_instructions["mode"]}'
@@ -90,7 +98,7 @@ class Composition:
                 self.periods.append(periods)
                 self.offsets.append(offsets)
 
-        if DEBUG:
+        if self.debug:
             print(f"tracks in composition: {self.tracks}")
             print(f"composition instructions: {self.instructions}")
             print(f"filenames: {self.filenames}")
@@ -99,20 +107,30 @@ class Composition:
             print(f"periods: {self.periods}")
             print(f"offsets: {self.offsets}")
 
-    def begin(self, _evt, _threads):
-        _evt.set()
+    def begin(self):
+        self.threads = []
+        self.run_event = threading.Event() 
+        self.run_event.set()
 
         for i in range(len(self.tracks)):
-            thread = threading.Thread(target=self.play, args=(i, _evt), daemon=True)
-            _threads.append(thread)
+            thread = threading.Thread(target=self.play, args=(i), daemon=True)
+            self.threads.append(thread)
             thread.start()
 
-    def play(self, _index, _evt):
+    def stop(self):
+        self.run_event.clear()
+        mixer.fadeout(1000)
+        time.sleep(1000)
+        mixer.quit()
+        for thread in self.threads:
+            thread.join()
+
+    def play(self, _index):
         instance = 0
         start_time = time.time()
         timer = 0
 
-        while _evt.is_set():
+        while self.run_event.is_set():
             if self.instructions["mode"] == "numeric":
                 if time.time() - start_time > timer:
                     instance = random.randint(0, len(self.filenames[_index]) - 1)
@@ -126,6 +144,8 @@ class Composition:
                     start_time = time.time()
             elif self.instructions["mode"] == "oscillating":
                 if not mixer.Channel(_index).get_busy():
+                    if self.debug:
+                        print(f"playing {self.name}/{self.tracks[_index]}/{self.filenames[_index][instance]}")
                     audio = mixer.Sound(
                         f"{self.name}/{self.tracks[_index]}/{self.filenames[_index][instance]}"
                     )
@@ -138,7 +158,8 @@ class Composition:
 # --------------------------------------------------------------------------------------
 
 def main():
-    global DEBUG
+    global composition
+
     parser = argparse.ArgumentParser()
 
     parser.add_argument("-c", "--composition", default=None, help="composition to be played")
@@ -151,17 +172,12 @@ def main():
 
     if args.composition not in compositions:
         print(f"composition {args.composition} is not in available compositions: {compositions}!")
-
-    DEBUG = args.debug
     
     mixer.init()
-    threads = list()
-    run_event = threading.Event()
-    run_event.set()
 
     if args.composition != None:
-        composition = Composition(args.composition)
-        composition.begin(run_event, threads)
+        composition = Composition(args.composition, args.debug)
+        composition.begin()
 
     server.run(host="0.0.0.0", port=args.port)
 
@@ -169,25 +185,47 @@ def main():
         while 1:
             time.sleep(0.1)
     except KeyboardInterrupt:
-        run_event.clear()
-        mixer.fadeout(1000)
-        mixer.quit()
-        for thread in threads:
-            thread.join()
+        composition.stop()
 
         print("\n...coda.")
 
+# --------------------------------------------------------------------------------------
+
 server = Flask(__name__, static_url_path="/www")
+cors = CORS(server)
+server.config['CORS_HEADER'] = 'Content-Type'
 
 @server.route("/start")
+@cross_origin()
 def start():
-    return "start the composition"
+    global run_event
+    global threads
+
+    print("starting composition")
+    mixer.init()
+    threads = list()
+    run_event = threading.Event()
+    run_event.set()
+
+    if composition:
+        composition.begin(run_event, threads)
+        return "start the composition"
+    else:
+        return "no such composition to begin"
 
 @server.route("/stop")
+@cross_origin()
 def stop():
+    global run_event
+    global threads
+
+    print("stopping composition")
+    if composition:
+        composition.stop(run_event, threads)
     return "stop the composition"
 
 @server.route("/state")
+@cross_origin()
 def state():
     return "state all compositions"
 

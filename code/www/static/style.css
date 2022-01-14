@@ -1,4 +1,50 @@
+@font-face {
+    font-family: 'Ovo Regular';
+    src: url('fonts/Ovo-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Poppins Regular';
+    src: url('fonts/Poppins-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Poppins Bold';
+    src: url('fonts/Poppins-SemiBold.ttf');
+}
+
 body {
     margin: 0;
     padding: 0;
+}
+
+header, main, footer{
+    width: 60vw;
+    margin: auto;
+}
+
+header{
+    padding-top: 2em;
+    padding-bottom: 1em;
+    margin-bottom: 2em;
+    border-bottom: 2px solid black;
+}
+
+main {
+    font-family: "Poppins Regular", sans-serif;
+}
+
+button {
+    padding: 1rem 3rem 1rem 3rem;
+    border: 3px solid #B59C75;
+    border-radius: 5px;
+    background-color: #f9eddb;
+
+    font-size: 2em;
+    font-family: "Poppins Regular", sans-serif;
+}
+
+.title{
+    font-size: 3em;
+    font-family: 'Ovo Regular', serif;
 }
