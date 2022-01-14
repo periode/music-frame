@@ -1,0 +1,9 @@
+name: vexations
+artist: érik satie
+description: meant to be played 840 times, which requires preparation
+mode: numeric
+tracks:
+  main:
+    range:
+      - 2
+      - 10

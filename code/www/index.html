@@ -1,24 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pogłos</title>
     <link rel="stylesheet" href="static/style.css">
-    <script src="static/script.js"></script>
+    <script src="static/lib/vue.dev.js"></script>
 </head>
-<body onload="init()">
+
+<body>
     <header>
         <div class="title">pogłos</div>
     </header>
-    <main>
+    <main id="app">
         <h1>
-            czesc
+            status
         </h1>
-        <button onclick="start()">start</button>
-        <button onclick="stop()">stop</button>
+        <div class="status">
+            {{ status }}
+        </div>
+
+        <h1>
+            compositions
+        </h1>
+
+        <div class="composition" v-for="composition in compositions">
+            <div class="info">
+                <div class="name">{{ composition.name }}</div>
+                <div class="artist">{{ composition.artist }}</div>
+                <div class="description">{{ composition.description }}</div>
+            </div>
+            <div class="controls">
+                <button class="start" @click="start(composition.name)">start</button>
+            </div>
+        </div>
+        <button class="stop" @click="stop()">stop</button>
     </main>
     <footer></footer>
+    <script src="static/script.js"></script>
 </body>
+
 </html>

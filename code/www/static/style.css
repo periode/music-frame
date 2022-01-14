@@ -35,16 +35,58 @@ main {
 }
 
 button {
+    border: none;
     padding: 1rem 3rem 1rem 3rem;
-    border: 3px solid #B59C75;
     border-radius: 5px;
-    background-color: #f9eddb;
+    cursor: pointer;
 
-    font-size: 2em;
+    font-size: 1.2em;
     font-family: "Poppins Regular", sans-serif;
+}
+
+hr{
+    width: 20%;
+    border: 1px solid black;
+    margin-bottom: 3rem;
+}
+
+.start{
+    background-color: #f9eddb;
+    height: 100%;
+}
+
+.start:hover{
+    background-color: #f8dfb8
+}
+
+.stop{
+    width: 100%;
 }
 
 .title{
     font-size: 3em;
     font-family: 'Ovo Regular', serif;
+}
+
+.composition{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.info{
+    padding: 1rem;
+    background-color: #f9eddb;
+}
+
+.name{
+    font-family: "Poppins Bold";
+}
+
+.description{
+    font-style: italic;
+}
+
+.status {
+    margin-bottom: 4rem;
 }

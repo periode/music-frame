@@ -1,0 +1,33 @@
+name: pogłos
+artist: gabor
+description: an oscillation of loops.
+mode: oscillating
+tracks:
+  low:
+    offset:
+      - 0
+      - 3
+    period:
+      - 0.05
+      - 0.1
+  high:
+    offset:
+      - 0
+      - 3
+    period:
+      - 0.05
+      - 0.1
+  arpeggio:
+    offset:
+      - 0
+      - 3
+    period:
+      - 0.05
+      - 0.1
+  swirl:
+    offset:
+      - 0
+      - 3
+    period:
+      - 0.05
+      - 0.1

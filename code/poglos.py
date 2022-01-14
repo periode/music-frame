@@ -4,17 +4,16 @@ import argparse
 import time
 import random
 import math
-import sys
 import threading
 import os
+import json
 
-from werkzeug.utils import send_file, send_from_directory
-
+os.environ['WERKZEUG_RUN_MAIN'] = 'true'
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 
 import pygame.mixer as mixer
 import yaml
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS, cross_origin
 
 composition = None
@@ -37,28 +36,31 @@ class Composition:
         print(f"loading composition - {_name}")
         self.name = _name
         self.debug = _debug
-        
 
         try:
             self.instructions = yaml.safe_load(
                 open(
-                    os.path.join(os.path.dirname(__file__), self.name)
+                    os.path.join(os.path.dirname(__file__), "compositions/", self.name)
                     + "/instructions.yml"
                 )
             )
+            if self.debug:
+                print(f"composition instructions: {self.instructions}")
         except:
             exit(f"no instructions found for composition: {self.name}.")
 
         # getting all tracks from dir names
         for dirpath, dirs, files in os.walk(
-            os.path.join(os.path.dirname(__file__), self.name)
+            os.path.join(os.path.dirname(__file__), "compositions/", self.name)
         ):
             self.tracks = dirs
+            if self.debug:
+                print(f'found tracks: {self.tracks}')
             break
 
         # getting all filenames and intervals from tracks
         for track in self.tracks:
-            current_dir = os.path.join(os.path.dirname(__file__), self.name, track)
+            current_dir = os.path.join(os.path.dirname(__file__), "compositions/", self.name, track)
             track_instructions = self.instructions["tracks"][track]
 
             for dirpath, dirs, files in os.walk(current_dir):
@@ -99,8 +101,6 @@ class Composition:
                 self.offsets.append(offsets)
 
         if self.debug:
-            print(f"tracks in composition: {self.tracks}")
-            print(f"composition instructions: {self.instructions}")
             print(f"filenames: {self.filenames}")
             print(f"intervals: {self.intervals}")
             print(f"volumes: {self.volumes}")
@@ -113,7 +113,7 @@ class Composition:
         self.run_event.set()
 
         for i in range(len(self.tracks)):
-            thread = threading.Thread(target=self.play, args=(i), daemon=True)
+            thread = threading.Thread(target=self.play, args=(i,), daemon=False)
             self.threads.append(thread)
             thread.start()
 
@@ -126,6 +126,9 @@ class Composition:
             thread.join()
 
     def play(self, _index):
+        if self.debug:
+            print(f"playing track#{_index}")
+        
         instance = 0
         start_time = time.time()
         timer = 0
@@ -137,7 +140,7 @@ class Composition:
                     timer = self.intervals[_index][instance]
 
                     audio = mixer.Sound(
-                        f"{self.name}/{self.tracks[_index]}/{self.filenames[_index][instance]}"
+                        f"compositions/{self.name}/{self.tracks[_index]}/{self.filenames[_index][instance]}"
                     )
                     mixer.Channel(_index).play(audio)
 
@@ -147,7 +150,7 @@ class Composition:
                     if self.debug:
                         print(f"playing {self.name}/{self.tracks[_index]}/{self.filenames[_index][instance]}")
                     audio = mixer.Sound(
-                        f"{self.name}/{self.tracks[_index]}/{self.filenames[_index][instance]}"
+                        f"compositions/{self.name}/{self.tracks[_index]}/{self.filenames[_index][instance]}"
                     )
                     mixer.Channel(_index).play(audio, -1)
                 
@@ -157,6 +160,10 @@ class Composition:
 
 # --------------------------------------------------------------------------------------
 
+def fetch_compositions():
+    for dirpath, dirs, files in os.walk(os.path.join(os.path.dirname(__file__), 'compositions')):
+        return dirs
+
 def main():
     global composition
 
@@ -164,14 +171,13 @@ def main():
 
     parser.add_argument("-c", "--composition", default=None, help="composition to be played")
     parser.add_argument("-d", "--debug", default=False, help="enable debug output")
+    parser.add_argument("-W", "--web", default=True, help="enable web interface")
     parser.add_argument("-p", "--port", default="2046", help="port for the webserver")
     parser.add_argument("-H", "--host", default="0.0.0.0", help="host for the webserver")
     args = parser.parse_args()
 
-    compositions = ["vexations", "swirl", "gabor"]
-
-    if args.composition not in compositions:
-        print(f"composition {args.composition} is not in available compositions: {compositions}!")
+    if args.composition not in fetch_compositions():
+        print(f"composition {args.composition} is not in available compositions: {fetch_compositions()}!")
     
     mixer.init()
 
@@ -179,7 +185,8 @@ def main():
         composition = Composition(args.composition, args.debug)
         composition.begin()
 
-    server.run(host="0.0.0.0", port=args.port)
+    if args.web:
+        server.run(host="0.0.0.0", port=args.port)
 
     try:
         while 1:
@@ -198,36 +205,57 @@ server.config['CORS_HEADER'] = 'Content-Type'
 @server.route("/start")
 @cross_origin()
 def start():
-    global run_event
-    global threads
+    global composition
+    name = request.args.get('composition')
+    if name:
+        if name not in fetch_compositions():
+            server.abort(400)
 
-    print("starting composition")
-    mixer.init()
-    threads = list()
-    run_event = threading.Event()
-    run_event.set()
+        print(f"starting composition {name}")
+        mixer.init()
 
-    if composition:
-        composition.begin(run_event, threads)
-        return "start the composition"
+        if composition == None or composition.name != name:
+            composition = Composition(name, False)
+
+        composition.begin()
+        return "composition is playing"
     else:
-        return "no such composition to begin"
+        print(f"no such composition \"{name}\" to begin")
+        server.abort(400)      
 
 @server.route("/stop")
 @cross_origin()
 def stop():
-    global run_event
-    global threads
-
+    global composition
     print("stopping composition")
     if composition:
-        composition.stop(run_event, threads)
+        composition.stop()
     return "stop the composition"
 
 @server.route("/state")
 @cross_origin()
 def state():
-    return "state all compositions"
+    state = []
+    compositions = fetch_compositions()
+
+    for name in compositions:
+        try:
+            instructions = yaml.safe_load(
+                open(
+                    os.path.join(os.path.dirname(__file__), "compositions/", name)
+                    + "/instructions.yml"
+                )
+            )
+
+            state.append({
+                "name"        : instructions["name"],
+                "artist"      : instructions["artist"],
+                "description" : instructions["description"]
+            })
+
+        except:
+            exit(f"no instructions found for composition: {name}.")
+    return json.dumps(state)
 
 
 if __name__ == "__main__":

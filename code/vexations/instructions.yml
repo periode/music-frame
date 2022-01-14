@@ -1,7 +1,0 @@
-name: vexations
-mode: numeric
-tracks:
-  main:
-    range:
-      - 2
-      - 10
