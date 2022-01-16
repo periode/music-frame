@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tonkasten</title>
+    <title>Pogłos</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
@@ -80,21 +80,21 @@
                 </div>
                 <div class="section">
                     <h2>sounds</h2>
-                    <p>the soundscapes loaded on the frame are played back dynamically. here are examples for the different modes of composition.</p>
+                    <p>the soundscapes loaded on the frame are played back dynamically. below are examples for the different modes of composition.</p>
                     <ul>
-                        <li class="composition">
-                            <div class="name">random delayed</div>
-                            <div class="description">each sample plays back one after the other, picked randomly. a
-                                break of
-                                random duration is inserted after each sample.</div>
 
+                        <li class="composition">
+                            <div class="name">volume oscillation</div>
+                            <div class="description">each sample loops continuously, fading in and out of the composition over different wave periods.</div>
                             <div class="playback-holder">
-                                <!-- <span class="credits">erik satie - vexations</span> -->
-                                <button onclick="startAudio(this, 'random')">play</button>
-                                <div class="log" id="log-rd">
-                                    <div class="msg">erik satie - vexations</div>
+                                <button onclick="startAudio(this, 'oscillation')">play</button>
+                                <div class="log" id="log-osc">
+                                    <div class="msg">gabor - untitled</div>
                                 </div>
-                                <audio src="" id="random-delayed"></audio>
+                                <audio src="" class="oscillation"></audio>
+                                <audio src="" class="oscillation"></audio>
+                                <audio src="" class="oscillation"></audio>
+                                <audio src="" class="oscillation"></audio>
                             </div>
                         </li>
 
@@ -119,14 +119,16 @@
                         </li>
 
                         <li class="composition">
-                            <div class="name">markov chain</div>
-                            <div class="description">each sample has a defined probability to play a given sample next.
-                                this
-                                allows for a more defined structure.</div>
+                            <div class="name">random delayed</div>
+                            <div class="description">each sample plays back one after the other, picked randomly. a
+                                break of
+                                random duration is inserted after each sample.</div>
+
                             <div class="playback-holder">
-                                <button onclick="">-</button>
+                                <!-- <span class="credits">erik satie - vexations</span> -->
+                                <button onclick="startAudio(this, 'random')">play</button>
                                 <div class="log" id="log-rd">
-                                    <div class="msg in-progress">in progress</div>
+                                    <div class="msg">erik satie - vexations</div>
                                 </div>
                                 <audio src="" id="random-delayed"></audio>
                             </div>

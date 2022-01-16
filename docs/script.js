@@ -41,6 +41,9 @@ let startAudio = (_el, _mode) => {
         case 'polyphonic':
             startPolyphonic();
             break;
+        case 'oscillation':
+            startOscillation();
+            break;
         default:
             console.log("wrong playmode")
             break;
@@ -52,6 +55,52 @@ let stopAudio = () => {
     if (timeout_rd) clearTimeout(timeout_rd)
     // if (audios_pp) for (let a of audios_pp) { a.pause() } //-- hard break
     if (timeouts_pp) for (let t of timeouts_pp) { clearTimeout(t) }
+
+    document.querySelectorAll('audio').forEach(audio => {
+        audio.pause()
+    })
+}
+
+let audios_osc
+
+let offsets = [
+    Math.random()*0.0003,
+    Math.random()*0.0003,
+    Math.random()*0.0003,
+    Math.random()*0.0003
+]
+
+let periods = [
+    Math.random()*10+5,
+    Math.random()*10+5,
+    Math.random()*10+5,
+    Math.random()*10+5,
+]
+
+let setVolumes = () => {
+    for (let i = 0; i < audios_osc.length; i++) {
+        let vol = (Math.sin(Date.now() * offsets[i] + periods[i]) + 1) / 2;
+        audios_osc[i].volume = vol
+        let el = document.createElement('div')
+        el.setAttribute('class', 'msg')
+        el.innerText += `setting gabor/${i}.mp3 volume to ${vol}...`
+        log.prepend(el)
+    }
+
+    setTimeout(setVolumes, 1000)
+}
+
+let startOscillation = () => {
+    log = document.getElementById('log-osc')
+    audios_osc = document.getElementsByClassName("oscillation")
+    for (let i = 0; i < audios_osc.length; i++) {
+        audios_osc[i].src = `assets/audio/gabor/${i}.mp3`
+        audios_osc[i].onloadedmetadata = () => {
+            audios_osc[i].play()
+        }
+    }
+
+    setVolumes()
 }
 
 let startRandomDelayed = () => {

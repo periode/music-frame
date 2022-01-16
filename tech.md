@@ -20,8 +20,7 @@ size of the mounted surface: approx 50x35cm, voltage sent: between 5V and 12V
 - `pip install -r requirements.txt`
 - - mutagen: get track duration
 - file playback
-  - [mplayer](http://www.mplayerhq.hu/design7/info.html) (raspberry pi)
-  - play (linux)
+  - [pygame](https://www.pygame.org)
 
 [how to make python3 default](https://stackoverflow.com/questions/62275714/how-to-change-the-default-python-version-in-raspberry-pi)
 

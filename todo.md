@@ -1,7 +1,7 @@
 # todo
 
-- [ ] web interface for composition and communication
-  - [ ] switch from labelling as technique to labelling as compositions (swirl, gabor, vexations)
+- [x] web interface for composition and communication
+  - [x] switch from labelling as technique to labelling as compositions (swirl, gabor, vexations)
   - [x] layout
   - [x] random
   - [x] polyphonic
@@ -22,7 +22,7 @@
     - [x] [using softvol 2](https://github.com/pimoroni/pirate-audio/issues/32) (`mplayer file -af volume=1`)
     - [x] pygame
   - [ ] stress test
-  - [ ] local web interface
+  - [x] local web interface
 - [ ] code
   - [x] added debug mode
   - [ ] add cute output: for each track pick a single character to print on the terminal (e.g. . - * ^)
