@@ -25,7 +25,7 @@
   - [x] local web interface
 - [ ] code
   - [x] added debug mode
-  - [ ] add cute output: for each track pick a single character to print on the terminal (e.g. . - * ^)
+  - [x] add cute output: for each track pick a single character to print on the terminal (e.g. . - * ^) - memory leak
   - [x] make `run_event` and `threads` member fields of `Composition`
   - [x] check pygame playback on raspi
     - [ ] fix `ALSA lib pcm.c:8545:(snd_pcm_recover) underrun occurred` error
@@ -35,11 +35,12 @@
     - [x] running on arch
     - [x] running on pi
   - [ ] connect with the flask API
-    - [ ] make the server run on its own thread
+    - [x] make the server run on its own thread
     - [x] list available compositions
     - [x] start compositions
     - [x] stop compositions
-    - [ ] volume control
+    - [x] volume control
+    - [ ] save/load preferences
   - [x] pygame playback
     - [x] make lfo for volume
   - [x] make each playmode into classes

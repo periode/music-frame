@@ -2,7 +2,8 @@ var app = new Vue({
     el: '#app',
     data: {
         host: "localhost:2046",
-        status: "Nothing is playing",
+        status: "Nothing is currently playing.",
+        volume: 0,
         compositions: []
     },
     methods: {
@@ -19,6 +20,14 @@ var app = new Vue({
                     console.log(res.status);
                 })
         },
+        setVolume: function (_evt) {
+            this.volume = _evt.target.value;
+            
+            fetch(`http://${this.host}/volume?vol=${this.volume}`)
+                .then(res => {
+                    console.log(res.status);
+                })
+        }
     },
     mounted: function () {
         console.log("pogłos v1.0");

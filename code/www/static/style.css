@@ -50,6 +50,23 @@ hr{
     margin-bottom: 3rem;
 }
 
+.volume{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.volume-value {
+    font-size: 1.4em;
+}
+
+input[type="range"] {
+    width: 80%;
+    color: grey;
+  }
+
 .start{
     background-color: #f9eddb;
     height: 100%;

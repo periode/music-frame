@@ -37,6 +37,10 @@
             </div>
         </div>
         <button class="stop" @click="stop()">stop</button>
+        <div class="volume">
+            <input type="range" name="volume" @input="setVolume" min="0" max="100"><span class="volume-value">{{volume}}</span>
+        </div>
+        
     </main>
     <footer></footer>
     <script src="static/script.js"></script>

@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import argparse
+from locale import normalize
 import time
 import random
 import math
@@ -172,8 +173,8 @@ def main():
     parser.add_argument("-c", "--composition", default=None, help="composition to be played")
     parser.add_argument("-d", "--debug", default=False, help="enable debug output")
     parser.add_argument("-W", "--web", default=True, help="enable web interface")
-    parser.add_argument("-p", "--port", default="2046", help="port for the webserver")
-    parser.add_argument("-H", "--host", default="0.0.0.0", help="host for the webserver")
+    parser.add_argument("-p", "--port", default="2046", help="port for the webapp")
+    parser.add_argument("-H", "--host", default="0.0.0.0", help="host for the webapp")
     args = parser.parse_args()
 
     if args.composition not in fetch_compositions():
@@ -185,31 +186,36 @@ def main():
         composition = Composition(args.composition, args.debug)
         composition.begin()
 
+    web_thread = None
     if args.web:
-        server.run(host="0.0.0.0", port=args.port)
+        web_thread = threading.Thread(name="web thread", target=app.run, args=("0.0.0.0",args.port))
+        web_thread.setDaemon(True)
+        web_thread.start()
 
     try:
         while 1:
             time.sleep(0.1)
     except KeyboardInterrupt:
-        composition.stop()
+        if composition:
+            composition.stop()
 
         print("\n...coda.")
+        exit(0)
 
 # --------------------------------------------------------------------------------------
 
-server = Flask(__name__, static_url_path="/www")
-cors = CORS(server)
-server.config['CORS_HEADER'] = 'Content-Type'
+app = Flask(__name__, static_url_path="/www")
+cors = CORS(app)
+app.config['CORS_HEADER'] = 'Content-Type'
 
-@server.route("/start")
+@app.route("/start")
 @cross_origin()
 def start():
     global composition
     name = request.args.get('composition')
     if name:
         if name not in fetch_compositions():
-            server.abort(400)
+            app.abort(400)
 
         print(f"starting composition {name}")
         mixer.init()
@@ -221,9 +227,9 @@ def start():
         return "composition is playing"
     else:
         print(f"no such composition \"{name}\" to begin")
-        server.abort(400)      
+        app.abort(400)      
 
-@server.route("/stop")
+@app.route("/stop")
 @cross_origin()
 def stop():
     global composition
@@ -232,7 +238,7 @@ def stop():
         composition.stop()
     return "stop the composition"
 
-@server.route("/state")
+@app.route("/state")
 @cross_origin()
 def state():
     state = []
@@ -257,6 +263,17 @@ def state():
             exit(f"no instructions found for composition: {name}.")
     return json.dumps(state)
 
+@app.route("/volume")
+@cross_origin()
+def volume():
+    volume = int(request.args.get('vol'))
+    print(f"setting volume to {volume}")
+    normalized = volume * 0.01
+    for i in range(mixer.get_num_channels()):
+        mixer.Channel(i).set_volume(normalized)
+
+    print(f"setting volume to {normalized}")
+    return "success"
 
 if __name__ == "__main__":
     print("poglos v0.1")
