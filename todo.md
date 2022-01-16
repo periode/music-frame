@@ -17,26 +17,29 @@
   - [x] rough modeling in blender
   - [x] details in fusion
 - [ ] controller
-  - [ ] software volume control
-    - [ ] [using softvol 1](https://bytesnbits.co.uk/raspberry-pi-i2s-sound-output/)
-    - [ ] [using softvol 2](https://github.com/pimoroni/pirate-audio/issues/32) (`mplayer file -af volume=1`)
+  - [x] software volume control
+    - [x] [using softvol 1](https://bytesnbits.co.uk/raspberry-pi-i2s-sound-output/)
+    - [x] [using softvol 2](https://github.com/pimoroni/pirate-audio/issues/32) (`mplayer file -af volume=1`)
+    - [x] pygame
   - [ ] stress test
   - [ ] local web interface
 - [ ] code
   - [x] added debug mode
   - [ ] add cute output: for each track pick a single character to print on the terminal (e.g. . - * ^)
   - [x] make `run_event` and `threads` member fields of `Composition`
-  - [ ] check pygame playback on raspi
+  - [x] check pygame playback on raspi
+    - [ ] fix `ALSA lib pcm.c:8545:(snd_pcm_recover) underrun occurred` error
   - [x] move all binaries to pygame
   - [ ] check bug on swirl where some files are not found
-  - [ ] apache server
+  - [x] apache server
     - [x] running on arch
-    - [ ] running on pi
+    - [x] running on pi
   - [ ] connect with the flask API
     - [ ] make the server run on its own thread
     - [x] list available compositions
     - [x] start compositions
     - [x] stop compositions
+    - [ ] volume control
   - [x] pygame playback
     - [x] make lfo for volume
   - [x] make each playmode into classes

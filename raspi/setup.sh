@@ -1,6 +1,10 @@
 sudo apt update
-sudo apt full-upgrade
-sudo apt install vim mplayer python3-pip
+sudo apt upgrade -y
+sudo apt install vim apache2 python3-pip libsdl2-mixer-2.0-0 -y
+
+#for apache conf
+sudo usermod -a -G www-data pi
+sudo chown -R -f www-data:www-data /var/www/html
 #hosts and hostname
 #echo "lirc=no" >> .mplayer/config #for no output to mplayer, add `lirc=no` to .mplayer/config
 #dtoverlay, comment rpi4 line and add `dtoverlay=hifiberry-dac`
