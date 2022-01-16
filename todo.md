@@ -30,7 +30,7 @@
   - [x] check pygame playback on raspi
     - [ ] fix `ALSA lib pcm.c:8545:(snd_pcm_recover) underrun occurred` error
   - [x] move all binaries to pygame
-  - [ ] check bug on swirl where some files are not found
+  - [x] check bug on swirl where some files are not found - explicitly set filenames to null in composition init
   - [x] apache server
     - [x] running on arch
     - [x] running on pi
@@ -40,7 +40,9 @@
     - [x] start compositions
     - [x] stop compositions
     - [x] volume control
-    - [ ] save/load preferences
+    - [x] save/load preferences
+    - [x] reactive layout
+    - [ ] volume slider
   - [x] pygame playback
     - [x] make lfo for volume
   - [x] make each playmode into classes

@@ -23,6 +23,12 @@ header, main, footer{
     margin: auto;
 }
 
+@media screen and (max-width: 992px) {
+    header, main, footer{
+        width: 95vw;
+    }
+}
+
 header{
     padding-top: 2em;
     padding-bottom: 1em;
@@ -48,6 +54,37 @@ hr{
     width: 20%;
     border: 1px solid black;
     margin-bottom: 3rem;
+}
+
+.current {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    min-height: 10vh;
+}
+
+.marquee{
+    position: absolute;
+    font-size: 1.6em;
+    width: 500px;
+    animation: loop 20s linear infinite;
+    align-self: center;
+}
+
+.status{
+    font-size: 1.2rem;
+    color: grey;
+    font-style: italic;
+}
+
+@keyframes loop {
+    from {
+        left: 100%;
+    }
+
+    to {
+        left: -30%
+    }
 }
 
 .volume{
@@ -93,6 +130,7 @@ input[type="range"] {
 
 .info{
     padding: 1rem;
+    margin-right: 1rem;
     background-color: #f9eddb;
 }
 

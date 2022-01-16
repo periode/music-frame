@@ -16,10 +16,16 @@
     </header>
     <main id="app">
         <h1>
-            status
+            currently
         </h1>
-        <div class="status">
-            {{ status }}
+        
+        <div class="current">
+            <div v-if="current"  class="marquee">
+                {{current.artist }} - {{ current.name }}
+            </div>
+            <div v-else class="marquee status">
+                {{ status }}
+            </div>    
         </div>
 
         <h1>
@@ -38,7 +44,7 @@
         </div>
         <button class="stop" @click="stop()">stop</button>
         <div class="volume">
-            <input type="range" name="volume" @input="setVolume" min="0" max="100"><span class="volume-value">{{volume}}</span>
+            <input type="range" name="volume" @input="setVolume" min="0" max="100" id="volume-slider"><span class="volume-value" id="volume">{{volume}}</span>
         </div>
         
     </main>
