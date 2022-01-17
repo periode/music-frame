@@ -16,11 +16,15 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: white;
 }
 
 header, main, footer{
     width: 60vw;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 @media screen and (max-width: 992px) {
@@ -31,22 +35,19 @@ header, main, footer{
 
 header{
     padding-top: 2em;
-    padding-bottom: 1em;
     margin-bottom: 2em;
     border-bottom: 2px solid black;
+
+    height: 10vh;
 }
 
 main {
     font-family: "Poppins Regular", sans-serif;
+    height: 82vh;
 }
 
 button {
-    border: none;
-    padding: 1rem 3rem 1rem 3rem;
-    border-radius: 5px;
     cursor: pointer;
-
-    font-size: 1.2em;
     font-family: "Poppins Regular", sans-serif;
 }
 
@@ -75,6 +76,7 @@ hr{
     font-size: 1.2rem;
     color: grey;
     font-style: italic;
+    margin: auto;
 }
 
 @keyframes loop {
@@ -87,34 +89,111 @@ hr{
     }
 }
 
-.volume{
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+/* CONTROLS */
 
+.controls{
     display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    background-color: white;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
     justify-content: space-between;
+    border-top: 2px solid black;
+}
+
+.volume{
+    width: 100%;
+    display: flex;
+    padding: 5px;
+    background-color: white;
+    border: 2px solid black;
+    margin-top: 1rem;
 }
 
 .volume-value {
     font-size: 1.4em;
 }
 
-input[type="range"] {
-    width: 80%;
+.volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25vh;
     color: grey;
-  }
-
-.start{
-    background-color: #f9eddb;
-    height: 100%;
+    
 }
 
-.start:hover{
-    background-color: #f8dfb8
+.volume-slider::-webkit-slider-thumb, .volume-slider::-moz-range-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #f8dfb8;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 4px;
 }
 
-.stop{
-    width: 100%;
+.volume-slider::-webkit-slider-runnable-track, .volume-slider::-moz-range-track{
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #f8dfb8;
+    color: black;
+    height: 5px;
+}
+
+.ctrl{
+    border: none;
+    padding: 1rem 3rem 1rem 3rem;
+    border-radius: 5px;
+
+    font-size: 1.2em;
+    font-family: "Poppins Regular", sans-serif;
+    width: min-content;
+    min-width: 100px;
+}
+
+@media screen and (max-width: 992px) {
+    .ctrl{
+        padding: 0.5rem 2rem 0.5rem 2rem;
+        font-size: 1rem;
+        min-width: 50px;
+    }
+}
+
+/* HELP */
+
+.help{
+    position: absolute;
+    z-index: 1;
+    width: 60vw;
+    background-color: white;
+    border: 2px solid black;
+    height: 65vh;
+}
+
+@media screen and (max-width: 992px) {
+    .help{
+        width: 95vw;
+    }
+}
+
+.help h1, .help p {
+    margin: 1rem;
+}
+
+.help p{
+    line-height: 2rem;
+}
+
+/* COMPOSITIONS */
+
+.compositions{
+    overflow-y: scroll;
+    max-height: 40vh;
 }
 
 .title{
@@ -132,6 +211,11 @@ input[type="range"] {
     padding: 1rem;
     margin-right: 1rem;
     background-color: #f9eddb;
+    cursor: pointer;
+}
+
+.info:hover{
+    background-color: #f8dfb8;
 }
 
 .name{
@@ -140,8 +224,4 @@ input[type="range"] {
 
 .description{
     font-style: italic;
-}
-
-.status {
-    margin-bottom: 4rem;
 }

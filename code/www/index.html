@@ -15,6 +15,10 @@
         <div class="title">pogłos</div>
     </header>
     <main id="app">
+        <div class="help" id="help" v-if="showHelp">
+            <h1>help</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolor ducimus obcaecati reprehenderit sunt molestias error quisquam incidunt necessitatibus iure autem mollitia consequuntur labore dolorum. Doloribus ducimus corporis aliquid animi.</p>
+        </div>
         <h1>
             currently
         </h1>
@@ -28,27 +32,31 @@
             </div>    
         </div>
 
-        <h1>
+        <h1 v-if="connected">
             compositions
         </h1>
 
-        <div class="composition" v-for="composition in compositions">
-            <div class="info">
-                <div class="name">{{ composition.name }}</div>
-                <div class="artist">{{ composition.artist }}</div>
-                <div class="description">{{ composition.description }}</div>
+        <div class="compositions" v-if="connected">
+            <div class="composition" v-for="composition in compositions">
+                <div class="info" @click="start(composition.name)">
+                    <div class="name">{{ composition.name }}</div>
+                    <div class="artist">{{ composition.artist }}</div>
+                    <div class="description">{{ composition.description }}</div>
+                </div>
             </div>
-            <div class="controls">
-                <button class="start" @click="start(composition.name)">start</button>
-            </div>
-        </div>
-        <button class="stop" @click="stop()">stop</button>
-        <div class="volume">
-            <input type="range" name="volume" @input="setVolume" min="0" max="100" id="volume-slider"><span class="volume-value" id="volume">{{volume}}</span>
         </div>
         
+        <div class="controls">
+            <button class="ctrl" v-if="connected" @click="stop()">stop</button>
+            <button class="ctrl" v-if="!connected" @click="fetchState()">connect</button>
+            <button class="ctrl" @click="showHelp = !showHelp">guide</button>
+            <button class="ctrl" @click="showVolume = !showVolume">volume</button>
+            <div class="volume" v-if="showVolume && connected">
+                <input type="range" name="volume" @input="setVolume" min="0" :value="volume" max="100" id="volume-slider" class="volume-slider">
+                <!-- <span class="volume-value" id="volume" v-if="connected">{{volume}}</span> -->
+            </div>
+        </div>
     </main>
-    <footer></footer>
     <script src="static/script.js"></script>
 </body>
 

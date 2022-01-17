@@ -2,10 +2,13 @@ var app = new Vue({
     el: '#app',
     data: {
         host: "localhost:2046",
-        status: "Nothing is currently playing.",
+        status: "Nothing is playing.",
+        connected: false,
         volume: 0,
         compositions: [],
-        current: null
+        current: null,
+        showHelp: true,
+        showVolume: false
     },
     methods: {
         start: function (_name) {
@@ -42,12 +45,11 @@ var app = new Vue({
                     return null
                 
             }).then(data => {
+                this.connected = true
+
                 this.compositions = data.compositions
                 this.current = data.current
-
                 this.volume = data.preferences.volume * 100
-                document.getElementById("volume").innerText = this.volume
-                document.getElementById("volume-slider").value = this.volume
                 
                 console.log(`fetched compositions: ${JSON.stringify(this.compositions)}`);
                 console.log(`fetched current: ${JSON.stringify(this.current)}`);

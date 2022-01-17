@@ -6,6 +6,7 @@
   - [x] random
   - [x] polyphonic
   - [x] add references
+  - [ ] deliver `.wav` through DO storage bucket
 - [ ] power supply
   - [ ] connect power supply
   - [ ] connect front switch
@@ -34,7 +35,7 @@
   - [x] apache server
     - [x] running on arch
     - [x] running on pi
-  - [ ] connect with the flask API
+  - [x] connect with the flask API
     - [x] make the server run on its own thread
     - [x] list available compositions
     - [x] start compositions
@@ -42,7 +43,8 @@
     - [x] volume control
     - [x] save/load preferences
     - [x] reactive layout
-    - [ ] volume slider
+    - [x] volume slider
+    - [ ] finish help text
   - [x] pygame playback
     - [x] make lfo for volume
   - [x] make each playmode into classes

@@ -1,6 +1,7 @@
-composition: null
-debug: '1'
+composition: gabor
+debug: false
 host: 0.0.0.0
+name: null
 port: '2046'
 preferences: null
 volume: 1.0

@@ -115,7 +115,10 @@ class Composition:
 
     def stop(self):
         self.run_event.clear()
-        mixer.fadeout(1000)
+        
+        if mixer:
+            mixer.fadeout(1000)
+
         for thread in self.threads:
             thread.join()
 
@@ -229,7 +232,8 @@ def start():
         mixer.init()
 
         if composition == None or composition.name != name:
-            composition.stop()
+            if composition:
+                composition.stop()
             composition = Composition(name, preferences.debug)
 
         composition.begin()
