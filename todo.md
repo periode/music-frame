@@ -6,7 +6,7 @@
   - [x] random
   - [x] polyphonic
   - [x] add references
-  - [ ] deliver `.wav` through DO storage bucket
+  - [x] deliver audio files through `static.enframed.net`
 - [ ] power supply
   - [ ] connect power supply
   - [ ] connect front switch
@@ -17,7 +17,8 @@
     - [x] possibility for table-like
   - [x] rough modeling in blender
   - [x] details in fusion
-- [ ] controller
+- [x] controller
+  - [ ] network setup
   - [x] software volume control
     - [x] [using softvol 1](https://bytesnbits.co.uk/raspberry-pi-i2s-sound-output/)
     - [x] [using softvol 2](https://github.com/pimoroni/pirate-audio/issues/32) (`mplayer file -af volume=1`)
@@ -44,7 +45,7 @@
     - [x] save/load preferences
     - [x] reactive layout
     - [x] volume slider
-    - [ ] finish help text
+    - [x] finish help text
   - [x] pygame playback
     - [x] make lfo for volume
   - [x] make each playmode into classes

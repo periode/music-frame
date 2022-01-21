@@ -1,28 +1,20 @@
 let audio_rd, log, timeout_rd
 let audios_pp, timeouts_pp = []
 
-let samples_rd = [
-    "vexations/0.mp3",
-    "vexations/1.mp3",
-    "vexations/2.mp3",
-    "vexations/3.mp3",
-    "vexations/4.mp3",
-    "vexations/5.mp3"
-]
-
 
 let index_rd = 0
 
 let samples_pp = ["pad", "saba", "strumboli", "tree"]
-let samples_max_pp = [2, 9, 11, 3]
+let samples_max_pp = [2, 9, 10, 3]
 let indexes_pp = [0, 0, 0, 0]
 
 let silence_min = 1000
 let silence_max = 5000
+let volumes_timeout
 
 let startAudio = (_el, _mode) => {
+    stopAudio()
     if (_el.innerText === 'stop') {
-        stopAudio()
         let el = document.createElement('div')
         el.setAttribute('class', 'msg')
         el.innerText += `stopped.`
@@ -53,8 +45,9 @@ let startAudio = (_el, _mode) => {
 let stopAudio = () => {
     if (audio_rd) audio_rd.pause()
     if (timeout_rd) clearTimeout(timeout_rd)
-    // if (audios_pp) for (let a of audios_pp) { a.pause() } //-- hard break
     if (timeouts_pp) for (let t of timeouts_pp) { clearTimeout(t) }
+    if (volumes_timeout) clearTimeout(volumes_timeout)
+    if (log) log = null
 
     document.querySelectorAll('audio').forEach(audio => {
         audio.pause()
@@ -87,14 +80,14 @@ let setVolumes = () => {
         log.prepend(el)
     }
 
-    setTimeout(setVolumes, 1000)
+    volumes_timeout = setTimeout(setVolumes, 1000)
 }
 
 let startOscillation = () => {
     log = document.getElementById('log-osc')
     audios_osc = document.getElementsByClassName("oscillation")
     for (let i = 0; i < audios_osc.length; i++) {
-        audios_osc[i].src = `assets/audio/gabor/${i}.mp3`
+        audios_osc[i].src = `https://static.enframed.net/poglos/gabor/${i}.mp3`
         audios_osc[i].onloadedmetadata = () => {
             audios_osc[i].play()
         }
@@ -110,8 +103,8 @@ let startRandomDelayed = () => {
 }
 
 let playRandomDelayed = () => {
-    index_rd = Math.floor(Math.random() * samples_rd.length)
-    audio_rd.src = `assets/audio/${samples_rd[index_rd]}`
+    index_rd = Math.floor(Math.random() * 6)
+    audio_rd.src = `https://static.enframed.net/poglos/vexations/${index_rd}.mp3`
     audio_rd.onloadedmetadata = () => {
         audio_rd.play()
 
@@ -119,7 +112,7 @@ let playRandomDelayed = () => {
 
         let el = document.createElement('div')
         el.setAttribute('class', 'msg')
-        el.innerText += `playing ${samples_rd[index_rd]}, waiting ${Math.floor(offset / 1000)} seconds before next play...`
+        el.innerText += `playing ${index_rd}, waiting ${Math.floor(offset / 1000)} seconds before next play...`
         log.prepend(el)
         if (timeout_rd) clearInterval(timeout_rd)
         timeout_rd = setTimeout(playRandomDelayed, offset)
@@ -135,7 +128,7 @@ let startPolyphonic = () => {
 }
 
 let playPolyphonic = (i) => {    
-        audios_pp[i].src = `assets/audio/swirl/${samples_pp[i]}/${Math.floor(Math.random() * samples_max_pp[i])}.mp3`
+        audios_pp[i].src = `https://static.enframed.net/poglos/swirl/${samples_pp[i]}/${Math.floor(Math.random() * samples_max_pp[i])}.mp3`
         audios_pp[i].onloadedmetadata = () => {
             audios_pp[i].play()
 
