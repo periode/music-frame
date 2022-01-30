@@ -1,4 +1,0 @@
-pyyaml
-pygame
-flask
-flask-cors

@@ -1,13 +1,12 @@
 #!/usr/bin/python
 
 import argparse
-from locale import normalize
 import time
 import random
 import math
 import threading
 import os
-import json
+import logging
 
 os.environ['WERKZEUG_RUN_MAIN'] = 'true'
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
@@ -15,13 +14,14 @@ os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame.mixer as mixer
 import yaml
 from flask import Flask, request
-from flask_cors import CORS, cross_origin
+from flask_socketio import SocketIO
 
 from preferences import Preferences
 
 class Composition:
     def __init__(self, _name, _debug):
-        print(f"loading composition - {_name}")
+        global logger
+        logger.info(f"loading composition - {_name}")
         self.run_event = None
         self.threads = None
 
@@ -37,11 +37,10 @@ class Composition:
 
         try:
             path = os.path.join(os.path.dirname(__file__), "compositions/", self.name, "instructions.yml")
-            if self.debug:
-                print(f"opening meta file: {path}")
+            logger.debug(f"opening meta file: {path}")
+
             self.meta = yaml.safe_load(open(path))
-            if self.debug:
-                print(f"composition meta: {self.meta}")
+            logger.debug(f"composition meta: {self.meta}")
         except:
             exit(f"no meta found for composition: {self.name}.")
 
@@ -50,8 +49,8 @@ class Composition:
             os.path.join(os.path.dirname(__file__), "compositions/", self.name)
         ):
             self.tracks = dirs
-            if self.debug:
-                print(f'found tracks: {self.tracks}')
+            
+            logger.debug(f'found tracks: {self.tracks}')
             break
 
         # getting all filenames and intervals from tracks
@@ -96,12 +95,12 @@ class Composition:
                 self.periods.append(periods)
                 self.offsets.append(offsets)
 
-        if self.debug:
-            print(f"filenames: {self.filenames}")
-            print(f"intervals: {self.intervals}")
-            print(f"volumes: {self.volumes}")
-            print(f"periods: {self.periods}")
-            print(f"offsets: {self.offsets}")
+        
+        logger.debug(f"filenames: {self.filenames}")
+        logger.debug(f"intervals: {self.intervals}")
+        logger.debug(f"volumes: {self.volumes}")
+        logger.debug(f"periods: {self.periods}")
+        logger.debug(f"offsets: {self.offsets}")
 
     def begin(self):
         self.threads = []
@@ -123,8 +122,7 @@ class Composition:
             thread.join()
 
     def play(self, _index):
-        if self.debug:
-            print(f"playing track#{_index}")
+        logger.debug(f"playing track#{_index}")
         
         instance = 0
         start_time = time.time()
@@ -144,8 +142,8 @@ class Composition:
                     start_time = time.time()
             elif self.meta["mode"] == "oscillating":
                 if not mixer.Channel(_index).get_busy():
-                    if self.debug:
-                        print(f"playing {self.name}/{self.tracks[_index]}/{self.filenames[_index][instance]}")
+                    
+                    logger.debug(f"playing {self.name}/{self.tracks[_index]}/{self.filenames[_index][instance]}")
                     audio = mixer.Sound(
                         f"compositions/{self.name}/{self.tracks[_index]}/{self.filenames[_index][instance]}"
                     )
@@ -156,10 +154,20 @@ class Composition:
 
 
 # --------------------------------------------------------------------------------------
-        
+def setup_logging():
+    l = logging.getLogger('poglos')
+    l.setLevel(logging.INFO)
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    ch.setFormatter(formatter)
+    l.addHandler(ch)     
+    return l
 
+logger = setup_logging()
 composition = None
-preferences = Preferences()
+preferences = Preferences(logger)
+app = None
 
 def fetch_compositions():
     for dirpath, dirs, files in os.walk(os.path.join(os.path.dirname(__file__), 'compositions')):
@@ -168,6 +176,8 @@ def fetch_compositions():
 def main():
     global composition
     global preferences
+    global app
+    global logger
 
     parser = argparse.ArgumentParser()
 
@@ -187,7 +197,7 @@ def main():
     
 
     if preferences.composition not in fetch_compositions():
-        print(f"composition {preferences.composition} is not in available compositions: {fetch_compositions()}!")
+        logger.warn(f"composition {preferences.composition} is not in available compositions: {fetch_compositions()}!")
     
     mixer.init()
 
@@ -197,9 +207,12 @@ def main():
 
     web_thread = None
     if preferences.web:
-        web_thread = threading.Thread(name="web thread", target=app.run, args=("0.0.0.0",preferences.port))
+        log = logging.getLogger('werkzeug')
+        log.setLevel(logging.ERROR)
+        web_thread = threading.Thread(name="web thread", target=socketio.run, args=(app, preferences.host, preferences.port))
         web_thread.daemon = True
         web_thread.start()
+        logger.info(f"started socket server on {preferences.host}:{preferences.port}")
 
     try:
         while 1:
@@ -211,51 +224,16 @@ def main():
         if composition:
             composition.stop()
 
-        print("\n...coda.")
+        logger.info("...coda.\n")
         exit(0)
 
 # --------------------------------------------------------------------------------------
 
-app = Flask(__name__, static_url_path="/www")
-cors = CORS(app)
-app.config['CORS_HEADER'] = 'Content-Type'
+app = Flask(__name__)
+socketio = SocketIO(app, cors_allowed_origins='*')
 
-@app.route("/start")
-@cross_origin()
-def start():
-    global composition
-    name = request.args.get('composition')
-    if name:
-        if name not in fetch_compositions():
-            return f"not a valid composition {name}"
-
-        mixer.init()
-
-        if composition == None or composition.name != name:
-            if composition:
-                composition.stop()
-            composition = Composition(name, preferences.debug)
-
-        composition.begin()
-        preferences.update('name', name)
-        return json.dumps(composition.meta)
-    else:
-        print(f"no such composition \"{name}\" to begin")
-        app.abort(400)      
-
-@app.route("/stop")
-@cross_origin()
-def stop():
-    global composition
-    print("stopping composition")
-    if composition:
-        composition.stop()
-        preferences.update('name', None)
-    return "stop the composition"
-
-@app.route("/state")
-@cross_origin()
-def state():
+@socketio.on('connect')
+def connect():
     state = []
     compositions = fetch_compositions()
 
@@ -282,20 +260,56 @@ def state():
             current = composition.meta
         
 
-    return json.dumps({"compositions": state, "current": current, "preferences": preferences.prefs})
+    socketio.emit('state', {"compositions": state, "current": current, "preferences": preferences.prefs}, json=True)
 
-@app.route("/volume")
-@cross_origin()
-def volume():
-    volume = int(request.args.get('vol'))
+@socketio.on("start")
+def start(_name):
+    global logger
+    global composition
+    name = _name
+
+    logger.info("socket request to start composition: {name}")
+    if name:
+        if name not in fetch_compositions():
+            return f"not a valid composition {name}"
+
+        mixer.init()
+
+        if composition == None or composition.name != name:
+            if composition:
+                composition.stop()
+            composition = Composition(name, preferences.debug)
+
+        composition.begin()
+        preferences.update('name', name)
+        socketio.emit('status', {'composition': composition.meta}, json=True)
+    else:
+        logger.warning(f"no such composition \"{name}\" to begin")
+        app.abort(400)      
+
+@socketio.on("stop")
+def stop():
+    global logger
+    global composition
+
+    logger.info(f"socket request to stop composition: {composition}")
+    if composition:
+        composition.stop()
+        preferences.update('name', None)
+    socketio.emit('status', {'composition': None}, json=True)
+
+@socketio.on("volume")
+def volume(_vol):
+    volume = int(_vol)
     normalized = volume * 0.01
     for i in range(mixer.get_num_channels()):
         mixer.Channel(i).set_volume(normalized)
 
     preferences.update('volume', normalized)
-    return "success"
+
+# --------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    print("poglos v0.1")
+    logger.info("poglos v0.1")
     main()
     

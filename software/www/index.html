@@ -8,6 +8,7 @@
     <title>Pogłos</title>
     <link rel="stylesheet" href="static/style.css">
     <script src="static/lib/vue.dev.js"></script>
+    <script src="static/lib/socket.io.min.js"></script>
 </head>
 
 <body>
@@ -17,19 +18,24 @@
     <main id="app">
         <div class="help" id="help" v-if="showHelp">
             <h1>help</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, dolor ducimus obcaecati reprehenderit sunt molestias error quisquam incidunt necessitatibus iure autem mollitia consequuntur labore dolorum. Doloribus ducimus corporis aliquid animi.</p>
+            <p>This is the web interface to your pogłos board. It allows you to control the playback of the compositions.</p>
+            <p>The 'connect' button first asks for your wifi credentials, then connects to your local network and requests compositions.</p>
+            <p>Select a composition to play it.</p>
         </div>
-        <h1>
+        <h1 v-if="connected">
             currently
         </h1>
         
         <div class="current">
-            <div v-if="current"  class="marquee">
+            <div v-if="connected && current"  class="marquee">
                 {{current.artist }} - {{ current.name }}
             </div>
-            <div v-else class="marquee status">
+            <div v-if="connected && !current" class="marquee status">
                 {{ status }}
-            </div>    
+            </div>
+            <div v-if="!connected" class="status connecting">
+                trying to connect
+            </div>
         </div>
 
         <h1 v-if="connected">
@@ -50,7 +56,7 @@
             <button class="ctrl" v-if="connected" @click="stop()">stop</button>
             <button class="ctrl" v-if="!connected" @click="fetchState()">connect</button>
             <button class="ctrl" @click="showHelp = !showHelp">guide</button>
-            <button class="ctrl" @click="showVolume = !showVolume">volume</button>
+            <button class="ctrl" v-if="connected" @click="showVolume = !showVolume">volume</button>
             <div class="volume" v-if="showVolume && connected">
                 <input type="range" name="volume" @input="setVolume" min="0" :value="volume" max="100" id="volume-slider" class="volume-slider">
                 <!-- <span class="volume-value" id="volume" v-if="connected">{{volume}}</span> -->

@@ -34,16 +34,32 @@ header, main, footer{
 }
 
 header{
-    padding-top: 2em;
+    margin-top: 2em;
     margin-bottom: 2em;
     border-bottom: 2px solid black;
 
     height: 10vh;
 }
 
+@media screen and (max-width: 992px) {
+    header{
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+}
+
 main {
     font-family: "Poppins Regular", sans-serif;
     height: 82vh;
+}
+
+@media screen and (max-width: 992px) {
+    header{
+        height: 8vh;
+    }
+    main{
+        height: 80vh;
+    }
 }
 
 button {
@@ -62,6 +78,18 @@ hr{
     position: relative;
     overflow: hidden;
     min-height: 10vh;
+}
+
+@media screen and (max-width: 992px) {
+    .current{
+        min-height: 5vh;
+    }
+
+    h1{
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
 }
 
 .marquee{
@@ -86,6 +114,38 @@ hr{
 
     to {
         left: -30%
+    }
+}
+
+.connecting::after {
+    display: inline-block;
+    content: '';
+    animation: threedots 3s steps(1, end) infinite;
+}
+
+.connecting::before {
+    display: inline-block;
+    content: '';
+    animation: threedots 3s steps(1, end) infinite;
+}
+
+@keyframes threedots {
+    0%{
+        content: ''
+    }
+    25% {
+        content: '.';
+    }
+
+    50% {
+        content: '..';
+    }
+
+    75% {
+        content: '...';
+    }
+    100%{
+        content: '';
     }
 }
 
@@ -123,7 +183,7 @@ hr{
 .volume-slider {
     -webkit-appearance: none;
     appearance: none;
-    width: 25vh;
+    width: 100%;
     color: grey;
     
 }
@@ -172,7 +232,9 @@ hr{
     width: 60vw;
     background-color: white;
     border: 2px solid black;
-    height: 65vh;
+    max-height: 65vh;
+    height: min-content;
+    overflow-y: scroll;
 }
 
 @media screen and (max-width: 992px) {
@@ -193,7 +255,7 @@ hr{
 
 .compositions{
     overflow-y: scroll;
-    max-height: 40vh;
+    max-height: 50vh;
 }
 
 .title{
@@ -210,6 +272,7 @@ hr{
 .info{
     padding: 1rem;
     margin-right: 1rem;
+    border-radius: 5px;
     background-color: #f9eddb;
     cursor: pointer;
 }

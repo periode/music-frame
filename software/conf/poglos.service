@@ -1,0 +1,14 @@
+[Unit]
+Description=Poglos resonating board
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python -u /home/pi/poglos/poglos.py -P /home/pi/poglos/preferences.yml
+WorkingDirectory=/home/pi/poglos
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target

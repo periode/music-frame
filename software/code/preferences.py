@@ -2,7 +2,7 @@ import yaml
 import os
 
 class Preferences:
-    def __init__(self):
+    def __init__(self, _logger):
         # defaults
         self.composition = None
         self.volume = 1.0
@@ -13,19 +13,18 @@ class Preferences:
 
         self.prefs = vars(self)
         self.debug = False
+        self.logger = _logger
         
     def load(self, _type, _input):
-        if self.debug:
-            print(f"loading prefs as {_type} from {_input}")
+        self.logger.debug(f"loading prefs as {_type} from {_input}")
 
         if _type == "yaml":
             try:
                 path = os.path.join(os.path.dirname(__file__), f"{_input}")
-                if self.debug:
-                    print(f"loading preferences from: {path}")
+                self.logger.debug(f"loading preferences from: {path}")
                 loaded = yaml.safe_load(open(path))
-                if self.debug:
-                    print(f"loaded: {loaded}")
+                self.logger.debug(f"loaded: {loaded}")
+
             except:
                 exit(f"no preferences found.")
 
@@ -47,8 +46,8 @@ class Preferences:
 
             self.prefs = vars(_input)
 
-        if self.debug:
-            print(f"set preferences: {self.prefs}")
+        
+        self.logger.debug(f"set preferences: {self.prefs}")
 
     def save(self):
         success = True

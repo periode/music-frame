@@ -18,7 +18,10 @@ size of the mounted surface: approx 50x35cm, voltage sent: between 5V and 12V
 
 - python version: 3.7+
 - `pip install -r requirements.txt`
+<<<<<<< HEAD
+=======
 - - mutagen: get track duration
+>>>>>>> 177918da9734fe93ae2b81b9514a5c762a71b34f
 - file playback
   - [pygame](https://www.pygame.org)
 
@@ -27,6 +30,17 @@ size of the mounted surface: approx 50x35cm, voltage sent: between 5V and 12V
 - `sudo ln -s /usr/bin/pip3 /usr/bin/pip`
 - `sudo rm /usr/bin/python && sudo ln -s /usr/bin/python3 /usr/bin/python`
 
+<<<<<<< HEAD
+#### access point
+
+- [https://github.com/gitbls/autoAP]
+- [https://github.com/balena-os/wifi-connect]
+- [https://github.com/rudiratlos/hotspot]
+- [https://www.raspberryconnect.com/projects/65-raspberrypi-hotspot-accesspoints/158-raspberry-pi-auto-wifi-hotspot-switch-direct-connection]
+- [https://raspberrypi.stackexchange.com/questions/93311/switch-between-wifi-client-and-access-point-without-reboot]
+
+=======
+>>>>>>> 177918da9734fe93ae2b81b9514a5c762a71b34f
 ### alternative
 
 - battery version: [pisugar2](https://www.tindie.com/products/pisugar/pisugar2-battery-for-raspberry-pi-zero/)

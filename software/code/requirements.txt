@@ -1,0 +1,6 @@
+pyyaml
+pygame
+flask
+flask-cors
+flask-socketio
+simple-websocket

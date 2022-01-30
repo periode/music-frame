@@ -1,0 +1,10 @@
+Redirect /library/test/success.html /
+Redirect /hotspot-detect.html /
+Redirect /ncsi.txt /
+Redirect /connecttest.txt /
+Redirect /fwlink/ /
+Redirect /generate_204 /r/204
+
+RewriteEngine on
+RewriteCond %{HTTP_USER_AGENT} ^CaptiveNetworkSupport(.*)$ [NC]
+RewriteRule ^(.*)$ / [L,R=301]
