@@ -24,15 +24,15 @@ view some of the compositions live here: [https://periode.github.io/tonkasten]
 - [listen to wikipedia](http://listen.hatnote.com/), for the possible data visualization
 - [brand new noise](https://www.brandnewnoise.com/), for the product design (without the interaction/instrument aspect)
 
-## details
+## overview
 
-- dimensions: 42cm * 26cm * 5cm
+- dimensions: 420mm \* 260mm \* 8mm
 - weight: 1.2kg
 - computer: raspberry pi zero w
 - power supply: 5.1V / 2.5A
 - speaker: dayton 3W 4Ohm exciter
-- dac + amplifier: hifiberry miniamp / adafruit speaker bonnet
-- mount material: cnc wooden frame with linseed oil finish
+- amplifier: adafruit speaker bonnet
+- mount material: cnc wooden frame with linseed oil finish and acrylic cover
 
 see [hardware](hardware/README.md) and [software](software/README.md)for more details
 

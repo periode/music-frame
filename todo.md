@@ -97,3 +97,12 @@ questions of timing, of spacing, of silence. questions of repetition and resolut
 - different modes? (morning, afternoon, night)
 - one long-ass soundscape vs. recombinating segments
 - how much user control? volume, which composition, but all the way to changing parameters?
+
+for conversion: `ffmpeg-normalize *.wav -ext mp3 -t -5 -c:a libmp3lame -t .`
+
+names:
+
+- sound board
+- timbre
+- sonancy
+- assonance
