@@ -13,7 +13,7 @@ os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 
 import pygame.mixer as mixer
 import yaml
-from flask import Flask, request
+from flask import Flask
 from flask_socketio import SocketIO
 
 from preferences import Preferences
@@ -197,7 +197,7 @@ def main():
     
 
     if preferences.composition not in fetch_compositions():
-        logger.warn(f"composition {preferences.composition} is not in available compositions: {fetch_compositions()}!")
+        logger.warning(f"composition {preferences.composition} is not in available compositions: {fetch_compositions()}!")
     
     mixer.init()
 
