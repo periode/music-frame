@@ -7,16 +7,11 @@
   - [x] polyphonic
   - [x] add references
   - [x] deliver audio files through `static.enframed.net`
-<<<<<<< HEAD
   - [ ] DIY version
 - [ ] power supply
   - [x] connect power supply
     - [ ] glue it
     - [ ] double sided tape on raspi
-=======
-- [ ] power supply
-  - [ ] connect power supply
->>>>>>> 177918da9734fe93ae2b81b9514a5c762a71b34f
   - [ ] connect front switch
 - [x] frame design
   - [x] drawing
@@ -32,27 +27,19 @@
     - [x] [using softvol 2](https://github.com/pimoroni/pirate-audio/issues/32) (`mplayer file -af volume=1`)
     - [x] pygame
   - [ ] stress test
-<<<<<<< HEAD
     - [x] CPU usage goes up to 180%: change the amount of time waiting in main thread? change the memory split between GPU and CPU? -> 16MB
-=======
->>>>>>> 177918da9734fe93ae2b81b9514a5c762a71b34f
   - [x] local web interface
 - [ ] code
   - [x] added debug mode
   - [x] add cute output: for each track pick a single character to print on the terminal (e.g. . - * ^) - memory leak
   - [x] make `run_event` and `threads` member fields of `Composition`
   - [x] check pygame playback on raspi
-<<<<<<< HEAD
     - [x] fix `ALSA lib pcm.c:8545:(snd_pcm_recover) underrun occurred` error [src](https://forums.adafruit.com/viewtopic.php?f=19&t=175237&p=858042) -> nope, trying to have all files as WAV?
-=======
-    - [ ] fix `ALSA lib pcm.c:8545:(snd_pcm_recover) underrun occurred` error
->>>>>>> 177918da9734fe93ae2b81b9514a5c762a71b34f
   - [x] move all binaries to pygame
   - [x] check bug on swirl where some files are not found - explicitly set filenames to null in composition init
   - [x] apache server
     - [x] running on arch
     - [x] running on pi
-<<<<<<< HEAD
     - [x] captive portal
     - [ ] issue with the "gstatic.connectivitycheck" on android
       - [x] [this one](https://github.com/jerryryle/rogue_ap/blob/main/setup.sh) with modifications:
@@ -70,9 +57,6 @@
       - [ ] should we always see what is playing? should it be on a separate view?
         - [ ] if it's on a separate view, there is room for generative graphics!
         - [ ] what kind of headspace do i want the user to be in?
-=======
-  - [x] connect with the flask API
->>>>>>> 177918da9734fe93ae2b81b9514a5c762a71b34f
     - [x] make the server run on its own thread
     - [x] list available compositions
     - [x] start compositions
@@ -82,10 +66,7 @@
     - [x] reactive layout
     - [x] volume slider
     - [x] finish help text
-<<<<<<< HEAD
     - [x] make a "loading" display while the composition loads
-=======
->>>>>>> 177918da9734fe93ae2b81b9514a5c762a71b34f
   - [x] pygame playback
     - [x] make lfo for volume
   - [x] make each playmode into classes
@@ -100,3 +81,19 @@
       - [x] had to use mplayer
     - [x] have an args list for each player (e.g. quiet or not)
   - [x] test on raspberry pi
+
+## notes
+
+background music as an artwork.
+
+it's about the surprise, the unexpected that comes out of the expected. the thing you know, and forgot you were aware of. it's about turning on the music the same way you turn on your favorite light on a coloured spot of the room. maybe like a musical plant.
+
+questions of timing, of spacing, of silence. questions of repetition and resolution (how often does it resolve? does it ever resolve, like [this](https://www.youtube.com/watch?v=IE8gISNPz7I)?). carl stone made [elastic](https://www.youtube.com/watch?v=X-OHTj4xcgg) (hence symmetrical?) music.
+
+[laurie spiegel on musical manipulation](http://www.retiary.org/ls/writings/musical_manip.html):  shift / reverse / rescale / interpolate / corrupt
+
+[laurie spiegel - noise in composition](http://retiary.org/ls/writings/info_theory_music.html)
+
+- different modes? (morning, afternoon, night)
+- one long-ass soundscape vs. recombinating segments
+- how much user control? volume, which composition, but all the way to changing parameters?

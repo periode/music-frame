@@ -14,11 +14,7 @@ pogłos is a generative sonic atmosphere contained in a wooden frame.
 
 it is slightly bigger than an A4 piece of paper, and it consists of a a small computer, a switch, and a speaker. the switch turns on the computer, the computer starts generating an ever-evolving version of a musical composition, and the speaker emits vibrations from the wood to fill the room with a soundscape. compositions are each conceived as a generative system, specifically for pogłos. they intend to live in the background of our lives, setting an atmosphere, decorating our sonic environment.
 
-## resources
-
-- [music.md](music.md) - notes for musical generation
-- [tech.md](tech.md) - list of all parts currently used for the prototype
-- [workshop.md](workshop.md) - workshop to build your own pogłos
+view some of the compositions live here: [https://periode.github.io/tonkasten]
 
 ## thoughts and influences
 
@@ -28,17 +24,17 @@ it is slightly bigger than an A4 piece of paper, and it consists of a a small co
 - [listen to wikipedia](http://listen.hatnote.com/), for the possible data visualization
 - [brand new noise](https://www.brandnewnoise.com/), for the product design (without the interaction/instrument aspect)
 
-## tech specs
+## details
 
 - dimensions: 42cm * 26cm * 5cm
 - weight: 1.2kg
 - computer: raspberry pi zero w
 - power supply: 5.1V / 2.5A
 - speaker: dayton 3W 4Ohm exciter
-- dac + amplifier: hifiberry miniamp
+- dac + amplifier: hifiberry miniamp / adafruit speaker bonnet
 - mount material: cnc wooden frame with linseed oil finish
 
-see [here](tech.md) for more details
+see [hardware](hardware/README.md) and [software](software/README.md)for more details
 
 ## images
 

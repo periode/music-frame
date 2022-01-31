@@ -1,6 +1,4 @@
-# tech
-
-## hardware
+# hardware
 
 ### main
 
@@ -14,33 +12,6 @@
 
 size of the mounted surface: approx 50x35cm, voltage sent: between 5V and 12V
 
-### software
-
-- python version: 3.7+
-- `pip install -r requirements.txt`
-<<<<<<< HEAD
-=======
-- - mutagen: get track duration
->>>>>>> 177918da9734fe93ae2b81b9514a5c762a71b34f
-- file playback
-  - [pygame](https://www.pygame.org)
-
-[how to make python3 default](https://stackoverflow.com/questions/62275714/how-to-change-the-default-python-version-in-raspberry-pi)
-
-- `sudo ln -s /usr/bin/pip3 /usr/bin/pip`
-- `sudo rm /usr/bin/python && sudo ln -s /usr/bin/python3 /usr/bin/python`
-
-<<<<<<< HEAD
-#### access point
-
-- [https://github.com/gitbls/autoAP]
-- [https://github.com/balena-os/wifi-connect]
-- [https://github.com/rudiratlos/hotspot]
-- [https://www.raspberryconnect.com/projects/65-raspberrypi-hotspot-accesspoints/158-raspberry-pi-auto-wifi-hotspot-switch-direct-connection]
-- [https://raspberrypi.stackexchange.com/questions/93311/switch-between-wifi-client-and-access-point-without-reboot]
-
-=======
->>>>>>> 177918da9734fe93ae2b81b9514a5c762a71b34f
 ### alternative
 
 - battery version: [pisugar2](https://www.tindie.com/products/pisugar/pisugar2-battery-for-raspberry-pi-zero/)
@@ -52,16 +23,12 @@ size of the mounted surface: approx 50x35cm, voltage sent: between 5V and 12V
 - integrated sd + dac: [yx5300](https://www.ebay.de/itm/YX5300-MP3-Musik-Player-Modul-Serial-UART-TTL-Module-Arduino-Raspberry-YX6300/253998552373?hash=item3b237e5535:g:0MMAAOSwWIJb-t2i)
 - esp32 board: [wemos pro](https://docs.wemos.cc/en/latest/d32/d32_pro.html)
 
-### arduino software
-
-- playback of WAV files from SD Card: [TMRpcm](https://github.com/TMRh20/TMRpcm)
-
-## notes
-
-- issue with software volume control?
-  - https://www.hifiberry.com/docs/hifiberryos/hifiberryos-how-to-control-playback/ (making a rotary volume control)
-
 ## cnc
 
 - baud rate should be set to 115200 (on mac)
 - modelled on blender
+
+## frame
+
+brown pickling (beizen) with linseed oil on top
+8mm - better for bass response and better resistance to warping

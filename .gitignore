@@ -2,4 +2,4 @@
 __pycache__
 **/*.img
 **/*.wav
-models/raw
+hardware/models/raw
