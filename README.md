@@ -14,7 +14,7 @@ pogłos is a generative sonic atmosphere contained in a wooden frame.
 
 it is slightly bigger than an A4 piece of paper, and it consists of a a small computer, a switch, and a speaker. the switch turns on the computer, the computer starts generating an ever-evolving version of a musical composition, and the speaker emits vibrations from the wood to fill the room with a soundscape. compositions are each conceived as a generative system, specifically for pogłos. they intend to live in the background of our lives, setting an atmosphere, decorating our sonic environment.
 
-view some of the compositions live here: [https://periode.github.io/tonkasten]
+view some of the compositions live at [periode.github.io/tonkasten]([https://periode.github.io/tonkasten)
 
 ## thoughts and influences
 

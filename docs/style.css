@@ -113,10 +113,6 @@ button{
     background-color: #f9eddb;
 }
 
-.section a {
-    font-style: italic;
-}
-
 .content{
     display: flex;
     flex-wrap: wrap;

@@ -31,13 +31,14 @@
                     <h2>idea</h2>
                     <p>pogłos is a generative sonic atmosphere contained in a wooden frame.<br /><br>
                         it is slightly bigger than
-                        an A4 piece of paper, and it consists of a a small computer, a switch, and a speaker. the switch
+                        an A3 piece of paper, and it consists of a small computer, a switch, and a speaker. the switch
                         turns
                         on the computer, the computer starts generating an ever-evolving version of a musical
                         composition, and the speaker emits vibrations from the wood to fill the room with a
                         soundscape.<br /><br />
                         compositions are each conceived as a generative system, specifically for pogłos. they intend to
-                        live in the background of our lives, setting an atmosphere, and decorating our sonic environment. when they're played by the computer, it is as if it was quietly improvising a known repertoire.
+                        live in the background of our lives, setting an atmosphere, and decorating our sonic
+                        environment. it is as if the computer was quietly improvising a known repertoire.
                     </p>
                     <p>
                         here are some of the inspirations for the project:
@@ -79,13 +80,15 @@
                     <div class="legend">back view</div>
                 </div>
                 <div class="section">
-                    <h2>sounds</h2>
-                    <p>the soundscapes loaded on the frame are played back dynamically. below are examples for the different modes of composition.</p>
+                    <h2>compositions</h2>
+                    <p>the soundscapes loaded on the frame are played back dynamically. below are examples for the
+                        different modes of composition.</p>
                     <ul>
 
                         <li class="composition">
                             <div class="name">volume oscillation</div>
-                            <div class="description">each sample loops continuously, fading in and out of the composition over different wave periods.</div>
+                            <div class="description">each sample loops continuously, fading in and out of the
+                                composition over different wave periods.</div>
                             <div class="playback-holder">
                                 <button onclick="startAudio(this, 'oscillation')">play</button>
                                 <div class="log" id="log-osc">
@@ -135,18 +138,68 @@
                         </li>
                     </ul>
                 </div>
+                <div class="section">
+                    <h2>build it yourself</h2>
+                    <h3>the electronics</h3>
+                    <p>you will need:</p>
+                    <ul>
+                        <li>an exciter speaker - (e.g. <a
+                                href="hhttps://www.daytonaudio.com/product/1172/daex13ct-4-coin-type-13mm-exciter-3w-4-ohm" target="_blank"
+                                rel="noopener noreferrer">dayton 3W 4Ohm</a>)</li>
+                        <li>a cheap computer - (e.g. <a
+                                href="https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/" target="_blank"
+                                rel="noopener noreferrer">raspberry pi zero 2</a>)</li>
+                        <li>a power source - (e.g. 5.1V / 2.5A micro-USB power supply)</li>
+                        <li>an SD card of at least 8Gb capacity.</li>
+                        <li>a way for the computer to output and amplify audio - (e.g. <a
+                                href="https://www.adafruit.com/product/3346" target="_blank"
+                                rel="noopener noreferrer">adafruit speaker bonnet</a>)</li>
+                    </ul>
+                    <h3>the frame</h3>
+                    <p>since the exciter speaker emits sound by vibrating the surface it is attached to, the frame will
+                        determine the sound quality in terms of <b>dimensions</b>, <b>thickness</b> and <b>density</b>. here is <a href="https://www.daytonaudio.com/topic/excitersbuyerguide" target="_blank"
+                        rel="noopener noreferrer">a primer</a> on how exciters work.
+                    </p>
+                    <p>for instance, a small, thick and dense surface such as a 10cm x 10cm x 10cm block of concrete
+                        will be almost silent. a large,
+                        light, and thin surface such as a 40cm x 40cm x 3cm polyester slab will resonate very well.
+                    </p>
+                    <p>
+                        it's a tradeoff game, so a good compromise is <b>a 42cm x 26cm board of 8mm thick plywood</b>
+                        which you can cut according to <a
+                            href="https://github.com/periode/tonkasten/raw/main/hardware/models/poglos_main_board%20211121.f3d"
+                            target="_blank" rel="noopener noreferrer">this CAD file (.f3d)</a>.
+                    </p>
+                    <p>finally, you will need to make all the pieces hold together. you can use <b>superglue for the speaker ring</b>, <b><a href="https://www.altimus.ae/media/catalog/product/cache/6f5c3bd1159caccf44b48c5a525b5a82/image/10674fa0f/velcro-tape-3-4-wide-505593.jpg" target="_blank" rel="noopener noreferrer">sticky velcro tape</a> for the raspberry pi</b>, and a pinch of <b>hot glue to fasten the power cable to the surface</b> (regular scotch tape would also work).</p>
+
+
+                    <h3>the software</h3>
+                    <p>the software is composed of three main parts:</p>
+                    <ul>
+                        <li>a playback application</li>
+                        <li>a wifi access point</li>
+                        <li>a web interface</li>
+                    </ul>
+                    <h4>the automatic way</h4>
+                    <p>download the <a href="http://static.enframed.net/poglos.img" target="_blank" rel="noopener noreferrer">poglos disk image</a> and watch <a href="https://www.youtube.com/watch?v=ntaXWS8Lk34" target="_blank" rel="noopener noreferrer">this video</a> to learn how to install it on your SD card. When you are prompted to choose and operating system, select <i>Use Custom</i> at the bottom of the list, and select the .img file you just downloaded.</p>
+                    <p>insert the SD card in the raspberry pi, power it up and, after a couple of seconds, a new wifi network should show up. connect to it using your smartphone/laptop and you should be redirected to <b>poglos.here</b>, the web interface where you can control composition playback. if you're not automatically redirected, you can open your browser and go to http://poglos.here directly.</p>
+                    <h4>the manual way</h4>
+                    <p>install the Raspberry Pi OS Lite (tested on Debian Bullseye). SSH into your Pi, then run the <a href="https://github.com/periode/tonkasten/blob/main/software/setup.sh" target="_blank" rel="noopener noreferrer">install script</a>. at the end of the install process, reboot.</p>
+                    <p>find out more on the <a href="https://github.com/periode/tonkasten" target="_blank"
+                            rel="noopener noreferrer">github</a>.</p>
+                </div>
                 <div class="section bullet-list">
                     <h2>specs</h2>
-                    <p>find out more on the <a href="https://github.com/tonkasten" target="_blank" rel="noopener noreferrer">github</a>.</p>
+
                     <ul>
-                        <li>42cm * 26cm * 8cm</li>
+                        <li>42cm * 26cm * 0.8cm</li>
                         <li>1.2kg</li>
                         <li>raspberry pi zero 2</li>
+                        <li>8Gb SD Card</li>
                         <li>5.1V / 2.5A power supply</li>
                         <li>dayton 3W 4Ohm exciter</li>
-                        <li>hifiberry miniamp</li>
+                        <li>adafruit speaker bonnet</li>
                         <li>wooden frame</li>
-                    </ul>
                     </ul>
                 </div>
         </main>
@@ -155,8 +208,7 @@
                 by <a href="http://enframed.net" target="_blank" rel="noopener noreferrer">période</a>.
             </div>
             <div class="half">
-                on <a href="http://github.com/periode/tonkasten" target="_blank"
-                    rel="noopener noreferrer">github</a>.
+                on <a href="http://github.com/periode/tonkasten" target="_blank" rel="noopener noreferrer">github</a>.
             </div>
         </footer>
     </div>
