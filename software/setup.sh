@@ -1,6 +1,47 @@
 #!/usr/bin/env bash
 
+if [ "$(id -u)" != "0" ]; then
+	printf "this must be run as root.\n" 1>&2
+	exit 1
+fi
+
 printf "setting up poglos (v1.0)\n"
+
+if [ -f "code.zip" ];
+then
+printf "code.zip is already here, skipping download...\n"
+else
+printf "downloading playback app...\n"
+wget https://static.enframed.net/poglos/code.zip
+unzip -o code.zip
+fi
+
+if [ -f "conf.zip" ];
+then
+printf "conf.zip is already here, skipping download...\n"
+else
+printf "downloading conf files...\n"
+wget https://static.enframed.net/poglos/conf.zip
+unzip -o conf.zip
+fi
+
+if [ -f "www.zip" ];
+then
+printf "www.zip is already here, skipping download...\n"
+else
+printf "downloading web interface...\n"
+wget https://static.enframed.net/poglos/www.zip
+unzip -o www.zip
+fi
+
+if [ -f "compositions.zip" ];
+then
+printf "compositions.zip is already here, skipping download...\n"
+else
+printf "downloading compositions...\n"
+wget https://static.enframed.net/poglos/compositions.zip
+unzip -o compositions.zip -d code/
+fi
 
 sudo apt update -y
 sudo apt upgrade -y
@@ -10,15 +51,10 @@ printf ""
 sudo raspi-config nonint do_hostname poglos
 sudo raspi-config nonint do_memory_split 16
 
-printf iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
-printf iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
+echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
+echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
 
 sudo apt install vim python3-pip libsdl2-mixer-2.0-0 apache2 bridge-utils dnsmasq hostapd iptables-persistent -y
-
-if [ "$(id -u)" != "0" ]; then
-	printf "this must be run as root." 1>&2
-	exit 1
-fi
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -65,10 +101,8 @@ a2enmod rewrite
 printf "done!\n\n"
 
 printf "installing python socket app...\n"
-# pip install --upgrade --no-deps --force-reinstall ${SCRIPT_DIR}/ap
-mkdir -p /home/pi/poglos
-cp -r ${SCRIPT_DIR}/code/* /home/pi/poglos
-pip install -r /home/pi/poglos/requirements.txt
+# pip install --upgrade --no-deps --force-reinstall ${SCRIPT_DIR}/ap #this is for a python wheel dist
+pip install -r /home/pi/code/requirements.txt
 printf "done!\n\n"
 
 printf "configuring web interface...\n"
@@ -79,7 +113,7 @@ a2dissite 000-default
 a2ensite 000-poglos
 printf "done!\n\n"
 
-printf "setting up playback as service"
+printf "setting up playback as service...\n"
 copy_with_backup ${SCRIPT_DIR}/conf/poglos.service /etc/systemd/system/
 systemctl enable poglos
 printf "done!\n\n"

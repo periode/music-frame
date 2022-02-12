@@ -8,6 +8,7 @@
   - [x] add references
   - [x] deliver audio files through `static.enframed.net`
   - [ ] DIY version
+    - [ ] add a ddl to a `.img`
 - [ ] power supply
   - [x] connect power supply
     - [ ] glue it
@@ -41,7 +42,9 @@
     - [x] running on arch
     - [x] running on pi
     - [x] captive portal
-    - [ ] issue with the "gstatic.connectivitycheck" on android
+    - [x] check the restore-wifi script
+    - [x] add a command to download all files in the install script.
+    - [ ] issue with the "gstatic.connectivitycheck" on android -> check [this](https://rachitpandya.medium.com/how-to-create-a-captive-portal-38aba6284b91)
       - [x] [this one](https://github.com/jerryryle/rogue_ap/blob/main/setup.sh) with modifications:
         - do not copy files over for the python wsgi app
         - change the apache config file to specify `ServerName poglos.here`

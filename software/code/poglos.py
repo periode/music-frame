@@ -295,6 +295,7 @@ def stop():
     logger.info(f"socket request to stop composition: {composition}")
     if composition:
         composition.stop()
+        composition = None
         preferences.update('name', None)
     socketio.emit('status', {'composition': None}, json=True)
 

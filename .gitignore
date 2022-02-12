@@ -3,3 +3,4 @@ __pycache__
 **/*.img
 **/*.wav
 hardware/models/raw
+**/*.zip

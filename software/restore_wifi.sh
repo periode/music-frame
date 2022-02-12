@@ -15,8 +15,9 @@ echo "Enter WiFi Password:"
 read PSK
 
 echo "Copying config files..."
-rm -f ${SCRIPT_DIR}/cfg/interfaces.d/br0
-cp -f ${SCRIPT_DIR}/cfg/rules.v4.wifi /etc/iptables/rules.v4
+# rm -f ${SCRIPT_DIR}/conf/interfaces.d/br0
+rm -f /etc/network/interfaces.d/br0
+cp -f ${SCRIPT_DIR}/conf/rules.v4.wifi /etc/iptables/rules.v4
 echo "done!"
 
 echo "Modifying config files..."

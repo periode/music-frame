@@ -1,7 +1,7 @@
 var app = new Vue({
     el: '#app',
     data: {
-        host: "archpierre:2046",
+        host: "poglos:2046",
         socket: null,
         status: "Nothing is playing.",
         connected: false,
@@ -13,6 +13,8 @@ var app = new Vue({
     },
     methods: {
         start: function (_name) {
+            this.current = null
+            this.status = `Requesting playback for ${_name}...`
             this.socket.emit('start', _name)
         },
         stop: function () {
@@ -51,10 +53,8 @@ var app = new Vue({
         })
 
         this.socket.on('status', (_data) => {
-            if (_data.composition)
                 this.current = _data.composition
-            else
-                console.error('No composition field on socket response!');
+                if(!this.current) this.status = "Nothing is playing."
         })
     }
 })
