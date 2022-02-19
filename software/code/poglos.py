@@ -7,6 +7,7 @@ import math
 import threading
 import os
 import logging
+import gpiozero
 
 os.environ['WERKZEUG_RUN_MAIN'] = 'true'
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
@@ -117,6 +118,7 @@ class Composition:
         
         if mixer:
             mixer.fadeout(1000)
+            time.sleep(1)
 
         for thread in self.threads:
             thread.join()
@@ -216,6 +218,22 @@ def main():
 
     try:
         while 1:
+            if switch.is_pressed:
+                if composition == None:
+                    logger.info("switch on...")
+                    # TODO consider if we always want to have a composition playing when we turn it on?
+                    # i'd tend to yes
+                    name = preferences.composition if preferences.composition else "gabor" 
+                    composition = Composition(name, preferences.debug)
+                    composition.begin()
+            else:
+                if composition:
+                    logger.info("switch off...")
+                    composition.stop()
+                    composition = None
+                    preferences.update('composition', None)
+                    preferences.save()
+            
             time.sleep(0.1)
     except KeyboardInterrupt:
         preferences.save()
@@ -229,6 +247,7 @@ def main():
 
 # --------------------------------------------------------------------------------------
 
+switch = gpiozero.Button(4)
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
 
@@ -281,7 +300,7 @@ def start(_name):
             composition = Composition(name, preferences.debug)
 
         composition.begin()
-        preferences.update('name', name)
+        preferences.update('composition', name)
         socketio.emit('status', {'composition': composition.meta}, json=True)
     else:
         logger.warning(f"no such composition \"{name}\" to begin")
@@ -296,7 +315,7 @@ def stop():
     if composition:
         composition.stop()
         composition = None
-        preferences.update('name', None)
+        preferences.update('composition', None)
     socketio.emit('status', {'composition': None}, json=True)
 
 @socketio.on("volume")
