@@ -7,12 +7,12 @@
   - [x] polyphonic
   - [x] add references
   - [x] deliver audio files through `static.enframed.net`
-  - [ ] DIY version
-    - [ ] add a ddl to a `.img`
+  - [x] DIY version
+    - [x] add a ddl to a `.img`
 - [ ] power supply
   - [x] connect power supply
-    - [ ] glue it
-    - [ ] double sided tape on raspi
+    - [x] glue it
+    - [x] double sided tape on raspi
   - [ ] connect front switch
 - [x] frame design
   - [x] drawing
@@ -22,7 +22,7 @@
   - [x] rough modeling in blender
   - [x] details in fusion
 - [x] controller
-  - [ ] network setup
+  - [x] network setup
   - [x] software volume control
     - [x] [using softvol 1](https://bytesnbits.co.uk/raspberry-pi-i2s-sound-output/)
     - [x] [using softvol 2](https://github.com/pimoroni/pirate-audio/issues/32) (`mplayer file -af volume=1`)
@@ -45,12 +45,12 @@
     - [x] check the restore-wifi script
     - [x] add a command to download all files in the install script.
     - [ ] issue with the "gstatic.connectivitycheck" on android -> check [this](https://rachitpandya.medium.com/how-to-create-a-captive-portal-38aba6284b91)
-      - [x] [this one](https://github.com/jerryryle/rogue_ap/blob/main/setup.sh) with modifications:
-        - do not copy files over for the python wsgi app
-        - change the apache config file to specify `ServerName poglos.here`
-        - delete some of the python wsgi modules in the apache conf
-        - add an iptables rule for ssh connection: `-A PREROUTING -i br0 -p tcp -m tcp --dport 22 -j DNAT --to-destination 10.1.1.1:22`
-      - [x] adapt all files and configs from the repo
+    - [x] [this one](https://github.com/jerryryle/rogue_ap/blob/main/setup.sh) with modifications:
+      - do not copy files over for the python wsgi app
+      - change the apache config file to specify `ServerName poglos.here`
+      - delete some of the python wsgi modules in the apache conf
+      - add an iptables rule for ssh connection: `-A PREROUTING -i br0 -p tcp -m tcp --dport 22 -j DNAT --to-destination 10.1.1.1:22`
+    - [x] adapt all files and configs from the repo
   - [x] connect with the flask API
     - [x] consider sockets
     - [x] add logging
