@@ -78,6 +78,7 @@ printf dtoverlay=hifiberry-dac >> /boot/config.txt
 sed -i -- 's/dtparam=audio=on/#dtparam=audio=on/g' /boot/config.txt
 
 copy_with_backup ${SCRIPT_DIR}/conf/asound.conf.ap /etc/.asound.conf
+copy_with_backup ${SCRIPT_DIR}/conf/daemon.conf.ap /etc/pulse/daemon.conf
 printf "done!\n\n"
 
 printf "copying network config files...\n"
