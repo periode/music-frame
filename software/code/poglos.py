@@ -302,6 +302,7 @@ def start(_name):
         composition.begin()
         preferences.update('composition', name)
         socketio.emit('status', {'composition': composition.meta}, json=True)
+        preferences.save()
     else:
         logger.warning(f"no such composition \"{name}\" to begin")
         app.abort(400)      
