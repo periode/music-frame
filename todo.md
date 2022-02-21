@@ -1,5 +1,6 @@
 # todo
 
+- [ ] name, consider hexagrams (53 jian development, 56 lu wanderer) - sound frame
 - [x] web interface for composition and communication
   - [x] switch from labelling as technique to labelling as compositions (swirl, gabor, vexations)
   - [x] layout
@@ -15,6 +16,12 @@
     - [x] double sided tape on raspi
   - [ ] connect front switch
 - [x] frame design
+  - [ ] v2
+    - [ ] update board to around A3 dimensions (42cm * 28cm), with a frame of 19.5cm * 12.5 cm
+    - [ ] check the thickness of acrylic -> 2.5mm
+    - [ ] check if the electronics stack can fit below 2cm (total enclosure height would be 2.2cm) -> height is 1.7cm
+    - [ ] think about mount for front switch, with power on/power off engravings
+    - [ ] cut it!
   - [x] drawing
   - [x] basic frame in blender
   - [x] support both standing and hanging
