@@ -15,3 +15,10 @@ scp code.zip pierre@enframed:/mnt/volume_nyc3_01/static/poglos
 scp conf.zip pierre@enframed:/mnt/volume_nyc3_01/static/poglos
 scp www.zip pierre@enframed:/mnt/volume_nyc3_01/static/poglos
 scp compositions.zip pierre@enframed:/mnt/volume_nyc3_01/static/poglos
+
+echo "cleaning up..."
+rm code.zip
+rm conf.zip
+rm www.zip
+rm compositions.zip
+echo "done!"
