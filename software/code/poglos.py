@@ -7,7 +7,9 @@ import math
 import threading
 import os
 import logging
-import gpiozero
+
+if os.uname()[1] == "frame":
+    import gpiozero
 
 os.environ['WERKZEUG_RUN_MAIN'] = 'true'
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
@@ -218,21 +220,30 @@ def main():
 
     try:
         while 1:
-            if switch.is_pressed:
-                if composition == None:
-                    logger.info("switch on...")
-                    # TODO consider if we always want to have a composition playing when we turn it on?
-                    # i'd tend to yes
-                    name = preferences.composition if preferences.composition else "gabor" 
-                    composition = Composition(name, preferences.debug)
-                    composition.begin()
+            if os.uname()[1] == "frame":
+                if switch.is_pressed:
+                    if composition == None:
+                        logger.info("switch on...")
+                        # TODO consider if we always want to have a composition playing when we turn it on?
+                        # i'd tend to yes
+                        name = preferences.composition if preferences.composition else "gabor" 
+                        composition = Composition(name, preferences.debug)
+                        composition.begin()
+                else:
+                    if composition:
+                        logger.info("switch off...")
+                        composition.stop()
+                        composition = None
+                        preferences.update('composition', None)
+                        preferences.save()
+            elif composition == None:
+                        logger.info("switch on...")
+                        name = preferences.composition if preferences.composition else "gabor" 
+                        composition = Composition(name, preferences.debug)
+                        composition.begin()
             else:
-                if composition:
-                    logger.info("switch off...")
-                    composition.stop()
-                    composition = None
-                    preferences.update('composition', None)
-                    preferences.save()
+                logger.debug(f'unknown host: {os.uname()[1]}')
+
             
             time.sleep(0.1)
     except KeyboardInterrupt:
@@ -247,7 +258,8 @@ def main():
 
 # --------------------------------------------------------------------------------------
 
-switch = gpiozero.Button(4)
+if os.uname()[1] == "frame":
+    switch = gpiozero.Button(4)
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
 
