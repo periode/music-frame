@@ -1,7 +1,7 @@
 var app = new Vue({
     el: '#app',
     data: {
-        host: "poglos:2046",
+        host: `${window.location.origin}:2046`,
         socket: null,
         status: "Nothing is playing.",
         connected: false,
