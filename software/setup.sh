@@ -111,8 +111,10 @@ printf "configuring web interface...\n"
 mkdir -p /var/www/html
 cp -r ${SCRIPT_DIR}/www/* /var/www/html/
 copy_with_backup ${SCRIPT_DIR}/conf/000-frame.conf.ap /etc/apache2/sites-available/000-frame.conf
+copy_with_backup ${SCRIPT_DIR}/conf/000-frame-android.conf.ap /etc/apache2/sites-available/android.conf
 a2dissite 000-default
 a2ensite 000-frame
+a2ensite android
 printf "done!\n\n"
 
 printf "setting up playback as service...\n"

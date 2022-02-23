@@ -4,6 +4,7 @@ Redirect /ncsi.txt /
 Redirect /connecttest.txt /
 Redirect /fwlink/ /
 Redirect /generate_204 /r/204
+Redirect /r/204 /
 
 RewriteEngine on
 RewriteCond %{HTTP_USER_AGENT} ^CaptiveNetworkSupport(.*)$ [NC]
