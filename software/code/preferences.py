@@ -1,8 +1,9 @@
 import yaml
 import os
+from logger import Logger
 
 class Preferences:
-    def __init__(self, _logger):
+    def __init__(self):
         # defaults
         self.composition = None
         self.volume = 1.0
@@ -13,7 +14,7 @@ class Preferences:
 
         self.prefs = vars(self)
         self.debug = False
-        self.logger = _logger
+        self.logger = Logger()
         
     def load(self, _type, _input):
         self.logger.debug(f"loading prefs as {_type} from {_input}")
