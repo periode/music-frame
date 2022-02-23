@@ -159,7 +159,7 @@ class Composition:
 
 # --------------------------------------------------------------------------------------
 def setup_logging():
-    l = logging.getLogger('poglos')
+    l = logging.getLogger("main")
     l.setLevel(logging.INFO)
     ch = logging.StreamHandler()
     ch.setLevel(logging.DEBUG)
@@ -338,6 +338,6 @@ def volume(_vol):
 # --------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    logger.info("poglos v0.1")
+    logger.info("music frame v0.1")
     main()
     

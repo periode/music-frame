@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pogłos</title>
+    <title>music frame</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
@@ -13,39 +13,28 @@
 <body>
     <div class="container">
         <header>
-            <div class="title">pogłos</div>
+            <div class="title">music frame</div>
             <div class="nav-holder"></div>
         </header>
         <main>
-            <div class="abstract">
-                pogłos<br />
-                <ol>
-                    <li>an acoustic phenomenon consisting in the prolongation of sound, caused by the action of
-                        reflected waves in a closed room</li>
-                    <li>a multiplication of sound</li>
-                    <li>a reference to something, especially in someone's work</li>
-                </ol>
-            </div>
+
             <div class="content">
                 <div class="section full">
                     <h2>idea</h2>
                     <p>pogłos is a generative sonic atmosphere contained in a wooden frame.<br /><br>
-                        it is slightly bigger than
+                        it is slightly smaller than
                         an A3 piece of paper, and it consists of a small computer, a switch, and a speaker. the switch
                         turns
                         on the computer, the computer starts generating an ever-evolving version of a musical
                         composition, and the speaker emits vibrations from the wood to fill the room with a
-                        soundscape.<br /><br />
-                        compositions are each conceived as a generative system, specifically for pogłos. they intend to
-                        live in the background of our lives, setting an atmosphere, and decorating our sonic
-                        environment. it is as if the computer was quietly improvising a known repertoire.
+                        soundscape.
                     </p>
                     <p>
                         here are some of the inspirations for the project:
                     <ul>
                         <li>
                             the <a href="https://www.youtube.com/watch?v=VlSM3GMuYVU" target="_blank"
-                                rel="noopener noreferrer">buddha machine</a>, which started the initial process.
+                                rel="noopener noreferrer">buddha machine</a>, which started the initial thought process, as portable, background, composed loops.
                         </li>
                         <li>
                             <a href="https://en.wikipedia.org/wiki/Vexations" target="_blank"
@@ -65,9 +54,17 @@
                         </li>
                     </ul>
                     </p>
-                    <p>
-                        turn it on, and let it fill the room for as long as needed.
+                    <p>additionally, the polish word <i>pogłos</i>, meaning:
+                        <ul>
+                            <li>an acoustic phenomenon consisting in the prolongation of sound, caused by the action of
+                                reflected waves in a closed room</li>
+                            <li>a multiplication of sound</li>
+                            <li>a reference to something, especially in someone's work</li>
+                        </ul>
+                            
+                        matches quite well.
                     </p>
+
                 </div>
                 <div class="section">
                     <h2>images</h2>
@@ -81,6 +78,9 @@
                 </div>
                 <div class="section">
                     <h2>compositions</h2>
+                    <p>compositions are each conceived as a generative system, specifically for this frame. they intend to
+                        live in the background of our lives, setting an atmosphere, and decorating our sonic
+                        environment. it is as if the computer was quietly improvising a known repertoire.</p>
                     <p>the soundscapes loaded on the frame are played back dynamically. below are examples for the
                         different modes of composition.</p>
                     <ul>
@@ -181,8 +181,8 @@
                         <li>a web interface</li>
                     </ul>
                     <h4>the automatic way</h4>
-                    <p>download the <a href="http://static.enframed.net/poglos/poglos_220219.zip" target="_blank" rel="noopener noreferrer">poglos disk image</a>, unzip it and watch <a href="https://www.youtube.com/watch?v=ntaXWS8Lk34" target="_blank" rel="noopener noreferrer">this video</a> to learn how to install it on your SD card. When you are prompted to choose and operating system, select <i>Use Custom</i> at the bottom of the list, and select the .img file you just downloaded.</p>
-                    <p>insert the SD card in the raspberry pi, power it up and, after a couple of seconds, a new wifi network should show up. connect to it using your smartphone/laptop and you should be redirected to <b>poglos.here</b>, the web interface where you can control composition playback. if you're not automatically redirected, you can open your browser and go to http://poglos.here directly.</p>
+                    <p>download the <a href="http://static.enframed.net/poglos/poglos_220219.zip" target="_blank" rel="noopener noreferrer">disk image</a>, unzip it and watch <a href="https://www.youtube.com/watch?v=ntaXWS8Lk34" target="_blank" rel="noopener noreferrer">this video</a> to learn how to install it on your SD card. When you are prompted to choose and operating system, select <i>Use Custom</i> at the bottom of the list, and select the .img file you just downloaded.</p>
+                    <p>insert the SD card in the raspberry pi, power it up and, after a couple of seconds, a new wifi network should show up. connect to it using your smartphone/laptop and you should be redirected to <b>frame.here</b>, the web interface where you can control composition playback. if you're not automatically redirected, you can open your browser and go to http://frame.here, or http://10.1.1.1 directly.</p>
                     <h4>the manual way</h4>
                     <p>install the Raspberry Pi OS Lite (tested on Debian Bullseye). SSH into your Pi, then run the <a href="https://github.com/periode/tonkasten/blob/main/software/setup.sh" target="_blank" rel="noopener noreferrer">install script</a>. at the end of the install process, reboot.</p>
                     <p>find out more on the <a href="https://github.com/periode/tonkasten" target="_blank"

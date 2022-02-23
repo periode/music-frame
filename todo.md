@@ -1,6 +1,6 @@
 # todo
 
-- [ ] name, consider hexagrams (53 jian development, 56 lu wanderer) - sound frame
+- [x] name, consider music frame, with hexagrams (53 jian development, 56 lu wanderer) for different models
 - [x] web interface for composition and communication
   - [x] switch from labelling as technique to labelling as compositions (swirl, gabor, vexations)
   - [x] layout
@@ -36,6 +36,8 @@
     - [x] [using softvol 2](https://github.com/pimoroni/pirate-audio/issues/32) (`mplayer file -af volume=1`)
     - [x] pygame
   - [ ] stress test
+    - [ ] bug: if I play a composition, and then refresh the page, the composition is not updated
+    - [ ] bug: deal properly with stopping the sound (given that there are two buttons, digital and physical -> maybe have the digital use the `is_playing` attribute?)
     - [x] CPU usage goes up to 180%: change the amount of time waiting in main thread? change the memory split between GPU and CPU? -> 16MB
   - [x] local web interface
 - [ ] code
@@ -58,7 +60,7 @@
       - [ ] consider other android virtual hosts as well
     - [x] [this one](https://github.com/jerryryle/rogue_ap/blob/main/setup.sh) with modifications:
       - do not copy files over for the python wsgi app
-      - change the apache config file to specify `ServerName poglos.here`
+      - change the apache config file to specify `ServerName frame.here`
       - delete some of the python wsgi modules in the apache conf
       - add an iptables rule for ssh connection: `-A PREROUTING -i br0 -p tcp -m tcp --dport 22 -j DNAT --to-destination 10.1.1.1:22`
     - [x] adapt all files and configs from the repo
