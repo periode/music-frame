@@ -236,13 +236,8 @@ def main():
                         composition = None
                         preferences.update('composition', None)
                         preferences.save()
-            elif composition == None:
-                        logger.info("switch on...")
-                        name = preferences.composition if preferences.composition else "gabor" 
-                        composition = Composition(name, preferences.debug)
-                        composition.begin()
             else:
-                logger.debug(f'unknown host: {os.uname()[1]}')
+                logger.debug(f'external host: {os.uname()[1]}')
 
             
             time.sleep(0.1)
