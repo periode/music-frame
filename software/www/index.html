@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pogłos</title>
+    <title>music frame</title>
     <link rel="stylesheet" href="static/style.css">
     <script src="static/lib/vue.dev.js"></script>
     <script src="static/lib/socket.io.min.js"></script>
@@ -13,50 +13,55 @@
 
 <body>
     <header>
-        <div class="title">pogłos</div>
+        <div class="title"><span>music</span> <span>frame</span></div>
     </header>
     <main id="app">
-        <div class="help" id="help" v-if="showHelp">
+        <div class="help popup" id="help" v-if="showHelp">
             <h1>help</h1>
-            <p>This is the web interface to your pogłos board. It allows you to control the playback of the compositions.</p>
-            <p>The 'connect' button first asks for your wifi credentials, then connects to your local network and requests compositions.</p>
-            <p>Select a composition to play it.</p>
+            <p>This is the web interface to your music frame. It allows you to control the playback of the compositions.</p>
+            <p>The 'stop' button stops the currently playing composition. If you turn off your frame and turn it back on, this is the composition which will play at the beginning.</p>
+            <p>The 'selector' button lists all available compositions.</p>
+            <p>The 'volume' button sets the playback loudness. This is the only way you can set the volume of the frame, and the volume setting only gets saved when you turn off the frame.</p>
+            <h1>local connection</h1>
+            <p>If you want to look under the hood and tinker around, you can connect to the music frame via SSH. Join the 'music frame' SSID and then SSH to 10.1.1.1 with the username pi and the password raspberry. From there, you can reset the access point mode by running the restore_wifi.sh script. Make sure you don't have any typos on the SSID or password of the network you want to connect to! Otherwise, you might need to manually add a wpa_supplicant.conf file in the boot partition of the SD card.</p>
         </div>
-        <h1 v-if="connected">
-            currently
-        </h1>
-        
-        <div class="current">
-            <div v-if="connected && current"  class="marquee">
-                {{current.artist }} - {{ current.name }}
-            </div>
-            <div v-if="connected && !current" class="marquee status">
-                {{ status }}
-            </div>
-            <div v-if="!connected" class="status connecting">
-                trying to connect
+
+        <div class="current">           
+            <div class="playing">
+                <div v-if="connected && current">
+                    {{current.artist }} - {{ current.name }}
+                </div>
+                <div v-if="connected && !current">
+                    {{ status }}
+                </div>
+                <div v-if="!connected" class="connecting">
+                    trying to connect
+                </div>
             </div>
         </div>
 
-        <h1 v-if="connected">
-            compositions
-        </h1>
-
-        <div class="compositions" v-if="connected">
-            <div class="composition" v-for="composition in compositions">
-                <div class="info" @click="start(composition.name)">
-                    <div class="name">{{ composition.name }}</div>
-                    <div class="artist">{{ composition.artist }}</div>
-                    <div class="description">{{ composition.description }}</div>
+        <div class="popup" v-if="showCompositions">
+            <h1 v-if="connected">
+                compositions
+            </h1>
+    
+            <div class="compositions" v-if="connected">
+                <div v-if="compositions.length == 0">no compositions loaded!</div>
+                <div class="composition" v-for="composition in compositions">
+                    <div class="info" @click="start(composition.name)">
+                        <div class="name">{{ composition.name }}</div>
+                        <div class="artist">{{ composition.artist }}</div>
+                        <div class="description">{{ composition.description }}</div>
+                    </div>
                 </div>
             </div>
         </div>
         
         <div class="controls">
-            <button class="ctrl" v-if="connected" @click="stop()">stop</button>
-            <button class="ctrl" v-if="!connected" @click="fetchState()">connect</button>
-            <button class="ctrl" @click="showHelp = !showHelp">guide</button>
-            <button class="ctrl" v-if="connected" @click="showVolume = !showVolume">volume</button>
+            <button class="ctrl" v-if="connected" @click="stop()"><img class="icon" src="static/images/stop.svg" alt=""></button>
+            <button class="ctrl" @click="showHelp = !showHelp"><img class="icon" src="static/images/information.svg" alt=""></button>
+            <button class="ctrl" @click="showCompositions = !showCompositions"><img class="icon" src="static/images/record.svg" alt=""></button>
+            <button class="ctrl" v-if="connected" @click="showVolume = !showVolume"><img class="icon" src="static/images/volume.svg"></button>
             <div class="volume" v-if="showVolume && connected">
                 <input type="range" name="volume" @input="setVolume" min="0" :value="volume" max="100" id="volume-slider" class="volume-slider">
                 <!-- <span class="volume-value" id="volume" v-if="connected">{{volume}}</span> -->

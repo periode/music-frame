@@ -10,16 +10,17 @@
   - [x] deliver audio files through `static.enframed.net`
   - [x] DIY version
     - [x] add a ddl to a `.img`
-- [ ] power supply
+- [x] power supply
   - [x] connect power supply
     - [x] glue it
     - [x] double sided tape on raspi
-  - [ ] connect front switch
+  - [x] connect front switch
+- [ ] consider a version with a hardware interface for the buttons
 - [x] frame design
   - [ ] v2
-    - [ ] update board to around A3 dimensions (42cm * 28cm), with a frame of 19.5cm * 12.5 cm
-    - [ ] check the thickness of acrylic -> 2.5mm
-    - [ ] check if the electronics stack can fit below 2cm (total enclosure height would be 2.2cm) -> height is 1.7cm
+    - [x] update board to around A3 dimensions
+    - [x] check the thickness of acrylic -> 2.5mm
+    - [x] check if the electronics stack can fit below 2cm (total enclosure height would be 2.2cm) -> height is 1.7cm
     - [ ] think about mount for front switch, with power on/power off engravings
     - [ ] cut it!
   - [x] drawing
@@ -38,6 +39,8 @@
     - [x] CPU usage goes up to 180%: change the amount of time waiting in main thread? change the memory split between GPU and CPU? -> 16MB
   - [x] local web interface
 - [ ] code
+  - [ ] make the hardware interface its own module
+    - [ ] think about message queuing/passing system, which would also enable a server module
   - [x] added debug mode
   - [x] add cute output: for each track pick a single character to print on the terminal (e.g. . - * ^) - memory leak
   - [x] make `run_event` and `threads` member fields of `Composition`
@@ -62,7 +65,7 @@
     - [x] consider sockets
     - [x] add logging
     - [ ] design
-      - [ ] typography rather than colors
+      - [x] typography rather than colors
       - [ ] logo should be unique (echo with the logo carved on the board with the cnc)
       - [ ] should we always see what is playing? should it be on a separate view?
         - [ ] if it's on a separate view, there is room for generative graphics!

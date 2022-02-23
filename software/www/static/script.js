@@ -3,18 +3,20 @@ var app = new Vue({
     data: {
         host: `${window.location.origin}:2046`,
         socket: null,
-        status: "Nothing is playing.",
+        status: "nothing is playing.",
         connected: false,
         volume: 0,
         compositions: [],
         current: null,
         showHelp: false,
-        showVolume: false
+        showVolume: false,
+        showCompositions: false
     },
     methods: {
         start: function (_name) {
             this.current = null
             this.status = `Requesting playback for ${_name}...`
+            this.showCompositions = false
             this.socket.emit('start', _name)
         },
         stop: function () {
@@ -54,7 +56,7 @@ var app = new Vue({
 
         this.socket.on('status', (_data) => {
                 this.current = _data.composition
-                if(!this.current) this.status = "Nothing is playing."
+                if(!this.current) this.status = "nothing is playing."
         })
     }
 })
