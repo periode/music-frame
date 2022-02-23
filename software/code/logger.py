@@ -3,21 +3,26 @@ import logging
 class Logger(object):
     _instance = None
     _logger = None
+    _level = logging.INFO
 
     def __new__(cls):
         if cls._instance is None:
-            print('Creating the object')
             cls._instance = super(Logger, cls).__new__(cls)
-            
+
             cls._logger = logging.getLogger("main")
-            cls._logger.setLevel(logging.INFO)
+            cls._logger.setLevel(cls._level)
             ch = logging.StreamHandler()
-            ch.setLevel(logging.DEBUG)
+            ch.setLevel(cls._level)
             formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             ch.setFormatter(formatter)
             cls._logger.addHandler(ch)  
 
         return cls._instance
+
+    @classmethod
+    def setDebug(cls):
+        cls._level = logging.DEBUG
+        cls._logger.setLevel(cls._level)
 
     def debug(self, _msg):
         self._logger.debug(_msg)

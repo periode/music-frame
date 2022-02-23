@@ -42,6 +42,7 @@
   - [x] local web interface
 - [ ] code
   - [ ] make the hardware interface its own module
+    - [x] modularize
     - [ ] think about message queuing/passing system, which would also enable a server module
   - [x] added debug mode
   - [x] add cute output: for each track pick a single character to print on the terminal (e.g. . - * ^) - memory leak

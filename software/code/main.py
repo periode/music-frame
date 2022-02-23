@@ -23,8 +23,11 @@ from logger import Logger
 
 # --------------------------------------------------------------------------------------
 
+if os.uname()[1] == "frame":
+    switch = gpiozero.Button(4)
 composition = None
 preferences = Preferences()
+logger = Logger()
 app = None
 
 def main():
@@ -45,8 +48,11 @@ def main():
     else:
         preferences.load("args", args)
 
+    if preferences.debug:
+        logger.setDebug()
+
     if preferences.composition not in Composition.fetch_compositions():
-        Logger().warning(f"composition {preferences.composition} is not in available compositions: {Composition.fetch_compositions()}!")
+        logger.warning(f"composition {preferences.composition} is not in available compositions: {Composition.fetch_compositions()}!")
     
     mixer.init()
 
@@ -61,14 +67,14 @@ def main():
         web_thread = threading.Thread(name="web thread", target=socketio.run, args=(app, preferences.host, preferences.port))
         web_thread.daemon = True
         web_thread.start()
-        Logger().info(f"started socket server on {preferences.host}:{preferences.port}")
+        logger.info(f"started socket server on {preferences.host}:{preferences.port}")
 
     try:
         while 1:
             if os.uname()[1] == "frame":
                 if switch.is_pressed:
                     if composition == None:
-                        Logger().info("switch on...")
+                        logger.info("switch on...")
                         # TODO consider if we always want to have a composition playing when we turn it on?
                         # i'd tend to yes
                         name = preferences.composition if preferences.composition else "gabor" 
@@ -76,13 +82,13 @@ def main():
                         composition.begin()
                 else:
                     if composition:
-                        Logger().info("switch off...")
+                        logger.info("switch off...")
                         composition.stop()
                         composition = None
                         preferences.update('composition', None)
                         preferences.save()
             else:
-                Logger().debug(f'external host: {os.uname()[1]}')
+                logger.debug(f'external host: {os.uname()[1]}')
 
             
             time.sleep(0.1)
@@ -94,19 +100,17 @@ def main():
         if mixer:
             mixer.quit()
 
-        Logger().info("...coda.\n")
+        logger.info("...coda.\n")
         exit(0)
 
 # --------------------------------------------------------------------------------------
 
-if os.uname()[1] == "frame":
-    switch = gpiozero.Button(4)
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
 
 @socketio.on('connect')
 def connect():
-    Logger().info("new socket client connected")
+    logger.info("new socket client connected")
     state = Composition.fetch_metas()
 
     current = None
@@ -120,7 +124,7 @@ def start(_name):
     global composition
     name = _name
 
-    Logger().info(f"socket request to start composition: {name}")
+    logger.info(f"socket request to start composition: {name}")
     if name:
         if name not in Composition.fetch_compositions():
             return f"not a valid composition {name}"
@@ -140,13 +144,13 @@ def start(_name):
         socketio.emit('status', {'composition': composition.meta}, json=True)
         preferences.save()
     else:
-        Logger().warning(f"no such composition \"{name}\" to begin")
+        logger.warning(f"no such composition \"{name}\" to begin")
         app.abort(400)      
 
 @socketio.on("stop")
 def stop():
     global composition
-    Logger().info(f"socket request to stop composition: {composition}")
+    logger.info(f"socket request to stop composition: {composition.name}")
     if composition:
         composition.stop()
         composition = None
@@ -165,6 +169,6 @@ def volume(_vol):
 # --------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    Logger().info("music frame v0.1")
+    logger.info("music frame v0.1")
     main()
     
