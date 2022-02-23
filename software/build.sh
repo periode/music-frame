@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "zipping files..."
-zip -r -9 code.zip code/poglos.py code/preferences.py code/preferences.yml code/requirements.txt
+zip -r -9 code.zip code/main.py code/preferences.py code/preferences.yml code/requirements.txt
 zip -r -9 conf.zip conf/ restore_wifi.sh
 zip -r -9 www.zip www/
 

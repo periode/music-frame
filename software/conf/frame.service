@@ -1,9 +1,9 @@
 [Unit]
-Description=Poglos resonating board
+Description=Music frame
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python -u /home/pi/code/poglos.py -P /home/pi/code/preferences.yml
+ExecStart=/usr/bin/python -u /home/pi/code/main.py -P /home/pi/code/preferences.yml
 WorkingDirectory=/home/pi/code
 StandardOutput=inherit
 StandardError=inherit

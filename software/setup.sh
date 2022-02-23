@@ -5,7 +5,7 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 
-printf "setting up poglos (v1.0)\n"
+printf "setting up music frame (v1.0)\n"
 
 if [ -f "code.zip" ];
 then
@@ -48,7 +48,7 @@ sudo apt upgrade -y
 
 # from https://loganmarchione.com/2021/07/raspi-configs-mostly-undocumented-non-interactive-mode/
 printf ""
-sudo raspi-config nonint do_hostname poglos
+sudo raspi-config nonint do_hostname frame
 sudo raspi-config nonint do_memory_split 16
 
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
@@ -91,7 +91,7 @@ copy_with_backup ${SCRIPT_DIR}/conf/rules.v4.ap /etc/iptables/rules.v4
 printf "done!\n\n"
 
 printf "modifying config files for ap...\n"
-sed -i -- "s/^ssid=.*$/ssid=Poglos/g" /etc/hostapd/hostapd.conf
+sed -i -- "s/^ssid=.*$/ssid=music frame/g" /etc/hostapd/hostapd.conf
 sed -i -- 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 sed -i -- 's/ENABLED=0/ENABLED=1/g' /etc/default/dnsmasq
 printf "done!\n\n"
@@ -104,19 +104,20 @@ printf "done!\n\n"
 printf "installing python socket app...\n"
 # pip install --upgrade --no-deps --force-reinstall ${SCRIPT_DIR}/ap #this is for a python wheel dist
 pip install -r /home/pi/code/requirements.txt
+chown -R pi /home/pi/code/
 printf "done!\n\n"
 
 printf "configuring web interface...\n"
 mkdir -p /var/www/html
 cp -r ${SCRIPT_DIR}/www/* /var/www/html/
-copy_with_backup ${SCRIPT_DIR}/conf/000-poglos.conf.ap /etc/apache2/sites-available/000-poglos.conf
+copy_with_backup ${SCRIPT_DIR}/conf/000-frame.conf.ap /etc/apache2/sites-available/000-frame.conf
 a2dissite 000-default
-a2ensite 000-poglos
+a2ensite 000-frame
 printf "done!\n\n"
 
 printf "setting up playback as service...\n"
-copy_with_backup ${SCRIPT_DIR}/conf/poglos.service /etc/systemd/system/
-systemctl enable poglos
+copy_with_backup ${SCRIPT_DIR}/conf/frame.service /etc/systemd/system/
+systemctl enable frame
 printf "done!\n\n"
 
 printf "Disabling DHCP...\n"

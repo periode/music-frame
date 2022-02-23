@@ -294,7 +294,7 @@ def start(_name):
     global composition
     name = _name
 
-    logger.info("socket request to start composition: {name}")
+    logger.info(f"socket request to start composition: {name}")
     if name:
         if name not in fetch_compositions():
             return f"not a valid composition {name}"

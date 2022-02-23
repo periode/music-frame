@@ -17,10 +17,10 @@ os: raspbian buster lite
 
 ## documentation
 
-hostname: poglos
+hostname: frame
 
 username: pi
-password: poglos
+password: raspberry
 
 ### access point
 
