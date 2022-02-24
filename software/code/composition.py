@@ -11,24 +11,34 @@ from logger import Logger
 
 
 class Composition:
+    _instance = None
     _compositions = None
     _metas = None
 
-    def __init__(self, _name, _debug):
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(Composition, cls).__new__(cls)
+        
+        mixer.init()
+        return cls._instance
+    
+
+    def load(self, _name):
         self.logger = Logger()
         self.logger.info(f"loading composition - {_name}")
         self.run_event = None
         self.threads = None
 
-        self.debug = _debug
         self.tracks = []
         self.filenames = []
+        self.meta = None
 
         self.intervals = []
         self.volumes = []
         self.periods = []
         self.offsets = []
         self.name = _name
+        self.is_playing = False
 
         try:
             path = os.path.join(os.path.dirname(__file__), "compositions/", self.name, "instructions.yml")
@@ -106,6 +116,8 @@ class Composition:
             thread = threading.Thread(target=self.play, args=(i,))
             self.threads.append(thread)
             thread.start()
+        
+        self.is_playing = True
 
     def stop(self):
         self.run_event.clear()
@@ -116,6 +128,8 @@ class Composition:
 
         for thread in self.threads:
             thread.join()
+
+        self.is_playing = False
 
     def play(self, _index):
         self.logger.debug(f"playing track#{_index}")
@@ -148,6 +162,11 @@ class Composition:
                 vol = (math.sin(self.offsets[_index][instance] + time.time() * self.periods[_index][instance]) + 1 ) / 2
                 mixer.Channel(_index).set_volume(vol)
     
+    @classmethod    
+    def setVolume(_vol):
+        for i in range(mixer.get_num_channels()):
+            mixer.Channel(i).set_volume(_vol)
+
     @classmethod
     def fetch_compositions(cls):
         if cls._compositions:
