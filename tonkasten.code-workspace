@@ -2,10 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"name": "Markov Test",
-			"path": "code/Markov Test"
 		}
 	],
 	"settings": {}

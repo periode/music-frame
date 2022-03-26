@@ -1,5 +1,11 @@
 # todo
 
+## bugfix
+
+- [x] on raw install on top of previous install, `systemctl reload apache2` returns "ERROR: Site android does not exist!" -> needed to rebuild
+
+## features
+
 - [x] name, consider music frame, with hexagrams (53 jian development, 56 lu wanderer) for different models
 - [x] web interface for composition and communication
   - [x] switch from labelling as technique to labelling as compositions (swirl, gabor, vexations)
